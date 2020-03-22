@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Restricted access"
+AuthUserFile /home/myriad61/public_html/covid-canada-tracker/test_folder/.htpasswd
+require valid-user

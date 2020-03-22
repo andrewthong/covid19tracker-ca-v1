@@ -1,0 +1,78 @@
+/* Style all input fields */
+input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
+/* Style the submit button */
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Style the container for inputs */
+.container {
+  padding: 20px;
+}
+
+/* The message box is shown when the user clicks on the password field */
+#message {
+  display:none;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+#message p {
+  padding: 10px 35px;
+  font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
+.txt-center{
+	text-align: center;
+}
+.success{
+  color: green;
+  font-size: 20px;
+}
+.error{
+  color: red;
+  font-size: 20px;
+}
+
+body{ background-color: #f1f1f1; }
+.add-new-form{ width:600px; margin:50px auto; display:table; background:#fff; padding:20px; border-top:3px solid #00adbb; }
+.add-new-form{ font-size:20px; }
+.add-new-form label{ width:200px; float:left; text-align:right; line-height:41px; }
+.add-new-form input{ width:370px; }
+.add-new-form textarea{width:370px; padding: 12px;  border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;  margin-top: 6px;  margin-bottom: 16px; }
+.add-new-form select{width:370px; padding: 12px;  border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;  margin-top: 6px;  margin-bottom: 16px; }
+.add-new-form input[type=submit]{    width: 150px !important; }
+

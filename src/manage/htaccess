@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Restricted access"
+AuthUserFile /home/ausrwmfh/public_html/manage/.htpasswd
+require valid-user
