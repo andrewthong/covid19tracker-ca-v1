@@ -19,6 +19,7 @@ $cases = new Cases($db);
 
 $return_data = array();
 
+
 $return_data['casePerPopulation'] = array( 'Ontario' => '134', 'Quebec' => '82', 'British Columbia' => '46',
   'Alberta' => '41', 'Manitoba' => '13', 'Saskatchewan' => '11', 'Nova Scotia' => '9.7','New Brunswick' => '7.5',
   'Newfoundland and Labrador' => '5.2', 'Prince Edward Island' => '1.4', 'Northwest Territories' => '0.41',
@@ -32,6 +33,7 @@ $return_data['dailyCases'] = $cases->dailyCases();
 $return_data['casesByProvince'] = $cases->casesByProvince();
 $return_data['deathsByProvince'] = $cases->deathsByProvince();
 $return_data['individualCases'] = $cases->individualCases();
+
 
 
 // print_r($return_data);

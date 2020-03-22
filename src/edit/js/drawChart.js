@@ -57,7 +57,7 @@ function lineGraph(data, id, flag) {
 		}
 	}
 
-	draw(graphConfig)
+	draw(graphConfig);
 
 }
 
@@ -87,7 +87,7 @@ function barGraph(data, id) {
 		}
 	}
 
-	draw(graphConfig)
+	draw(graphConfig);
 
 }
 
@@ -126,4 +126,5 @@ function draw(graphConfig) {
 			}
 		}
 	});
+
 }

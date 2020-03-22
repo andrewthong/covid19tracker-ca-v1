@@ -33,7 +33,7 @@ $(document).ready(() => {
 
 			$('#totalCasesProvinceTable').append(
 				"<tr>" +
-				"<td>" + r.province + "</td>" +
+				"<td onClick='loadProvinceData(\"" + r.province + "\")'>" + r.province + "</td>" +
 				"<td><b><i>" + r.cases + "</i></b></td>" +
 				"<td>" + calc + "</td>" +
 				"<td>" + r.deaths + "</td>" +
@@ -41,9 +41,6 @@ $(document).ready(() => {
 				"</tr>"
 			)
 		})
-
-
-
 
 		lineGraph(res["cumulativeCases"], "#cumulativeCaseChart", true);
 		lineGraph(res["dailyCases"], "#dailyCaseChart", false);
@@ -83,3 +80,33 @@ $(document).ready(() => {
 	})
 
 });
+
+function loadProvinceData(province) {
+	$.ajax({
+		url: "http://localhost/edit/api/controller/province.php",
+		type: "POST",
+		data: JSON.stringify({
+			province: province
+		})
+	}).then(res => {
+		console.log(res)
+
+		$('#displayCumulative').remove()
+		$('#displayMap').remove()
+
+		$('#newCasesByDay')[0].innerHTML = province + " New Cases by Day";
+		$('#newCasesByProvince')[0].innerHTML = province + " Cumulative Cases";
+
+		$('#dailyCaseChart').remove();
+		$('#provinceCasesChart').remove();
+
+		$('#dailyCaseChartDiv').append("<canvas id=\"dailyCaseChart\" width=\"100%\" height=\"40\"></canvas>")
+		$('#provinceCasesChartDiv').append("<canvas id=\"provinceCasesChart\" width=\"100%\" height=\"40\"></canvas>")
+
+		lineGraph(res["dailyCases"], "#dailyCaseChart", false);
+		lineGraph(res["cumulativeCases"], "#provinceCasesChart", true);
+
+	}, err => {
+		console.log(err)
+	})
+}
