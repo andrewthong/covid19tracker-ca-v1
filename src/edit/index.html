@@ -11,9 +11,17 @@
   <link href="css/styles.css" rel="stylesheet" />
   <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+  <script src="assets/demo/datatables-demo.js"></script>
   <script type="text/javascript" src="js/mapdata.js"></script>
   <script type="text/javascript" src="js/canadamap.js"></script>
   <script type="text/javascript" src="js/drawChart.js"></script>
+  <script type="text/javascript" src="js/state.js"></script>
+
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160029240-1"></script>
@@ -209,100 +217,7 @@
     </footer>
   </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-  <script src="js/scripts.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-  <script src="assets/demo/datatables-demo.js"></script>
-
-  <script>
-    $(document).ready(() => {
-      $.ajax({
-        url: "http://localhost/edit/api/controller/cases.php",
-        type: "GET",
-      }).then(res => {
-        console.log(res)
-
-        $('#updateTime')[0].innerHTML = res["lastUpdate"];
-        $('#totalCases')[0].innerHTML = res["totalCases"]["cases"] + " ";
-        $('#totalCasesCanada')[0].innerHTML = res["totalCases"]["cases"] + " ";
-
-        $('#totalDeath')[0].innerHTML = res["totalCases"]["death"] + " ";
-
-        var death_sum = 0;
-        res['casesByProvince'].forEach(r => {
-          if (r.province in res['deathsByProvince'])
-            r['deaths'] = res['deathsByProvince'][r.province];
-          else
-            r['deaths'] = 0;
-
-          death_sum += res['deathsByProvince'][r.province];
-        });
-
-        $('#infectedPerCanada')[0].innerHTML = Math.round((parseInt(res["totalCases"]["cases"]) / parseInt(res["casePerPopulation"]["Canada"]) * 100)) / 100;
-
-        res["casesByProvince"].forEach(r => {
-          var calc = Math.round((parseInt(r.cases) / parseInt(res["casePerPopulation"][r.province]) * 100)) / 100;
-          if (isNaN(calc))
-            calc = 0;
-
-          if (r.province == "Northwest Territories")
-            calc = 2.44;
-
-          $('#totalCasesProvinceTable').append(
-            "<tr>" +
-            "<td>" + r.province + "</td>" +
-            "<td><b><i>" + r.cases + "</i></b></td>" +
-            "<td>" + calc + "</td>" +
-            "<td>" + r.deaths + "</td>" +
-            "<td><a href='" + r.source + "'>Source</a></td>" +
-            "</tr>"
-          )
-        })
 
 
-
-
-        lineGraph(res["cumulativeCases"], "#cumulativeCaseChart", true);
-        lineGraph(res["dailyCases"], "#dailyCaseChart", false);
-        barGraph(res["casesByProvince"], "#provinceCasesChart");
-
-        $('#individualCaseTable').dataTable({
-          "data": res["individualCases"],
-          "columns": [{
-              "data": "id"
-            }, {
-              "data": "dte"
-            }, {
-              "data": "province"
-            }, {
-              "data": "city"
-            }, {
-              "data": "age"
-            }, {
-              "data": "travel_history"
-            }, {
-              "data": "confirmed_presumptive"
-            },
-            {
-              "data": "source",
-              "render": (data, type, row, meta) => {
-                if (type === 'display')
-                  data = '<a href="' + data + '">Source</a>';
-
-                return data;
-              }
-            }
-          ]
-        });
-
-      }, err => {
-        console.log(err)
-      })
-
-    });
-  </script>
 
 </html>
