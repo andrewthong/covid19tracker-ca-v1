@@ -91,6 +91,7 @@ $(document).ready(() => {
 
 		// update datatable of individual Cases
 		$('#individualCaseTable').dataTable({
+			"order": [[0, "desc"]],
 			"data": res["individualCases"],
 			"columns": [{
 					"data": "id"
