@@ -53,7 +53,8 @@ print_r($lcase_per_population);exit;*/
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
         <script type="text/javascript" src="js/mapdata.js"></script>		
-        <script  type="text/javascript" src="js/canadamap.js"></script>
+        <script type="text/javascript" src="js/canadamap.js"></script>
+        <script type="text/javascript" src="js/utils.js"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160029240-1"></script>
@@ -187,7 +188,6 @@ print_r($lcase_per_population);exit;*/
                                                 <td>
                                                 	<b><?php
                                                 		$getDividedCVal = getDividedVal('canada', $lcase_per_population, mysqli_num_rows($result));
-                                                	
                                                 	
 														echo $getDividedCVal;
                                                 	?></b>
@@ -339,6 +339,7 @@ print_r($lcase_per_population);exit;*/
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.23/dayjs.min.js" crossorigin="anonymous"></script>
         <!-- <script src="assets/demo/chart-area-demo.js"></script> -->
         <!-- <script src="assets/demo/chart-bar-demo.js"></script> -->
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
@@ -492,22 +493,6 @@ print_r($lcase_per_population);exit;*/
 
         function showGraphArea()
         {
-
-            var toShortFormat = function(dt){
-                var month_names =["Jan","Feb","Mar",
-                                    "Apr","May","Jun",
-                                    "Jul","Aug","Sep",
-                                    "Oct","Nov","Dec"];
-                
-                var day = dt.getDate();
-                var month_index = dt.getMonth();
-                var year = dt.getFullYear();
-                
-                return "" + month_names[month_index] + " " + day;
-            };
-            
-            
-
             $.post("case_chart_area.php",
             function (data)
             {
@@ -516,9 +501,8 @@ print_r($lcase_per_population);exit;*/
                 var marks = [];
                 var sum = 0;
                 for (var i in data) {
-                    var ddate = data[i].date;
-                    var cdate = toShortFormat(new Date(ddate));
-                    name.push(cdate);
+                    var shortDate = utils.date.toShortFormat(data[i].date);
+                    name.push(shortDate);
                     
                     sum += parseInt(data[i].totalGCase);
                     marks.push(sum);
@@ -585,22 +569,6 @@ print_r($lcase_per_population);exit;*/
 
         function showGraphArea2()
         {
-
-            var toShortFormat = function(dt){
-                var month_names =["Jan","Feb","Mar",
-                                    "Apr","May","Jun",
-                                    "Jul","Aug","Sep",
-                                    "Oct","Nov","Dec"];
-                
-                var day = dt.getDate();
-                var month_index = dt.getMonth();
-                var year = dt.getFullYear();
-                
-                return "" + month_names[month_index] + " " + day;
-            };
-            
-            
-
             $.post("case_chart_area_2.php",
             function (data)
             {
@@ -609,9 +577,8 @@ print_r($lcase_per_population);exit;*/
                 var marks = [];
                 var sum = 0;
                 for (var i in data) {
-                    var ddate = data[i].date;
-                    var cdate = toShortFormat(new Date(ddate));
-                    name.push(cdate);
+                    var shortDate = utils.date.toShortFormat(data[i].date);
+                    name.push(shortDate);
                     
                     num = parseInt(data[i].totalGCase);
                     marks.push(num);
