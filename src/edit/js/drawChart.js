@@ -125,7 +125,8 @@ function draw(graphConfig, logScale) {
 			yAxes: [{
 				ticks: {
 					min: 0,
-					maxTicksLimit: 5
+					maxTicksLimit: 5,
+					callback: tick => tick.toLocaleString()
 				},
 				gridLines: {
 					color: "rgba(0, 0, 0, .125)",
