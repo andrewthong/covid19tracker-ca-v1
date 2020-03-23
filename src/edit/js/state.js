@@ -3,7 +3,8 @@ $(document).ready(() => {
 
 	// on load make GET request to load all info required for index page
 	$.ajax({
-		url: "http://localhost/Covid19TrackerCA/src/edit/api/controller/cases.php",
+		url: url + "api/controller/cases.php",
+		// url: "http://localhost/Covid19TrackerCA/src/edit/api/controller/cases.php",
 		type: "GET",
 	}).then(res => {
 		console.log(res)
@@ -118,32 +119,6 @@ $(document).ready(() => {
 
 });
 
-// function loadProvinceData(province) {
-// 	$.ajax({
-// 		url: "http://localhost/edit/api/controller/province.php",
-// 		type: "POST",
-// 		data: JSON.stringify({
-// 			province: province
-// 		})
-// 	}).then(res => {
-// 		console.log(res)
-//
-// 		$('#displayCumulative').remove()
-// 		$('#displayMap').remove()
-//
-// 		$('#newCasesByDay')[0].innerHTML = province + " New Cases by Day";
-// 		$('#newCasesByProvince')[0].innerHTML = province + " Cumulative Cases";
-//
-// 		$('#dailyCaseChart').remove();
-// 		$('#provinceCasesChart').remove();
-//
-// 		$('#dailyCaseChartDiv').append("<canvas id=\"dailyCaseChart\" width=\"100%\" height=\"40\"></canvas>")
-// 		$('#provinceCasesChartDiv').append("<canvas id=\"provinceCasesChart\" width=\"100%\" height=\"40\"></canvas>")
-//
-// 		lineGraph(res["dailyCases"], "#dailyCaseChart", false);
-// 		lineGraph(res["cumulativeCases"], "#provinceCasesChart", true);
-//
-// 	}, err => {
-// 		console.log(err)
-// 	})
-// }
+function goAdvanced() {
+	window.location.href = url + "advanced.html";
+}

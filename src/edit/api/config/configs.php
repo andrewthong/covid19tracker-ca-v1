@@ -1,5 +1,4 @@
 <?php
-
   return (object) array(
     "host" => "localhost",
     "username" => "agulbs",

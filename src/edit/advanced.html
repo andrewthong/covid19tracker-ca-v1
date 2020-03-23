@@ -17,10 +17,12 @@
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
   <script src="assets/demo/datatables-demo.js"></script>
-  <script type="text/javascript" src="js/mapdata.js"></script>
-  <script type="text/javascript" src="js/canadamap.js"></script>
+  <!-- <script type="text/javascript" src="js/mapdata.js"></script> -->
+  <!-- <script type="text/javascript" src="js/canadamap.js"></script> -->
   <script type="text/javascript" src="js/drawChart.js"></script>
-  <script type="text/javascript" src="js/state.js"></script>
+  <!-- <script type="text/javascript" src="js/state.js"></script> -->
+  <script type="text/javascript" src="js/advanced.js"></script>
+  <script type="text/javascript" src="js/config.js"></script>
 
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -49,8 +51,7 @@
 
         <br>
         <br>
-        <h2 class="mt-4" id="updateTime">this is update time</h2>
-        <br>
+        <h2 class="mt-4"><button type="button" class="btn btn-secondary" onClick="goBack()">Back</button></h2> <br>
         <div class="row">
 
           <div class="col-xl-3 col-md-6">
@@ -60,7 +61,8 @@
                 <a class="small text-white stretched-link" href="https://public.ehealthsask.ca/sites/COVID-19/">Launch COVID-19 Self Assessment</a>
                 <div class="small text-white"><svg class="svg-inline--fa fa-angle-right fa-w-8" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"
                     data-fa-i2svg="">
-                    <path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path>
+                    <path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z">
+                    </path>
                   </svg><!-- <i class="fas fa-angle-right"></i> -->
                 </div>
               </div>
@@ -73,7 +75,8 @@
                 <a class="small text-white stretched-link" href="https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection/latest-travel-health-advice.html">Instructions from the Government of Canada</a>
                 <div class="small text-white"><svg class="svg-inline--fa fa-angle-right fa-w-8" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"
                     data-fa-i2svg="">
-                    <path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path>
+                    <path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z">
+                    </path>
                   </svg><!-- <i class="fas fa-angle-right"></i> -->
                 </div>
               </div>
@@ -86,7 +89,8 @@
                 <a class="small text-white stretched-link" href="https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection/being-prepared.html">Learn More</a>
                 <div class="small text-white"><svg class="svg-inline--fa fa-angle-right fa-w-8" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"
                     data-fa-i2svg="">
-                    <path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path>
+                    <path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z">
+                    </path>
                   </svg><!-- <i class="fas fa-angle-right"></i> -->
                 </div>
               </div>
@@ -95,20 +99,23 @@
         </div>
 
         <div class="row">
-          <div class="col-xl-6" id="displayMap">
-            <div class="card mb-4">
-              <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>By Map</div>
-              <div class="card-body">
-                <div class="row">
-                  <div id="map" class="col-md-7 col-sm-12 col-xs-12  mx-auto"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-6" id="displayCumulative">
-            <div class="card mb-4">
-              <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Canada Cumulative Cases: <i><b><span id="totalCases"></span>cases / <span id="totalDeath"></span> death</b></i></div>
-              <div class="card-body"><canvas id="cumulativeCaseChart" width="100%"></canvas></div>
+          <div class="col-xl-12">
+            <div class="form-group">
+              <label for="provinceSelection">Select a Province</label>
+              <select class="form-control" id="provinceSelection" style="width:300px;">
+                <option>Ontario</option>
+                <option>British</option>
+                <option>Alberta</option>
+                <option>Quebec</option>
+                <option>Saskatchewan</option>
+                <option>Repatriated Canadians</option>
+                <option>New Brunswick</option>
+                <option>Manitoba</option>
+                <option>Prince Edward Island</option>
+                <option>Newfoundland and Labrador</option>
+                <option>Nova Scotia</option>
+                <option>Northwest Territories</option>
+              </select>
             </div>
           </div>
         </div>
@@ -116,51 +123,14 @@
         <div class="row">
           <div class="col-xl-6">
             <div class="card mb-4">
-              <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Canada New Cases</div>
-              <div class="card-body"><canvas id="dailyCaseChart" width="100%" height="40"></canvas></div>
+              <div class="card-header"><i class="fas fa-chart-area mr-1"></i><span id="provinceCumulativeCases"></span></div>
+              <div class="card-body" id="provinceCumulativeCasesChartDiv"><canvas id="provinceCumulativeCasesChart" width="100%" height="40"></canvas></div>
             </div>
           </div>
           <div class="col-xl-6">
             <div class="card mb-4">
-              <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>By Province</div>
-              <div class="card-body"><canvas id="provinceCasesChart" width="100%" height="40"></canvas></div>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="card mb-4">
-          <div class="card-header"><i class="fas fa-table mr-1"></i>Total Cases By Province</div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
-                <thead>
-                  <tr>
-                    <th>Province</th>
-                    <th>Total Cases</th>
-                    <th>Infected per 100 000</th>
-                    <th>Deaths</th>
-                    <th>Source</th>
-                  </tr>
-                </thead>
-                <tfoot>
-
-                  <tr>
-                    <td><i><b>Canada</b></i></td>
-                    <td><i><b id="totalCasesCanada"></i></b></td>
-                    </b></i></td>
-                    <td>
-                      <b id="infectedPerCanada"></b>
-
-                    </td>
-                    <td><i><b class="death_total"></b></i></td>
-                    <td><a href="https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection.html">Source</a></td>
-                  </tr>
-                </tfoot>
-                <tbody id="totalCasesProvinceTable">
-
-                </tbody>
-              </table>
+              <div class="card-header"><i class="fas fa-chart-bar mr-1"></i><span id="provinceNewCases"></span></div>
+              <div class="card-body" id="provinceNewCasesChartDiv"><canvas id="provinceNewCasesChart" width="100%" height="40"></canvas></div>
             </div>
           </div>
         </div>
@@ -168,7 +138,7 @@
         <div class="card mb-4">
           <div class="card-header"><i class="fas fa-table mr-1"></i>Individual Cases</div>
           <div class="card-body">
-            <div class="table-responsive">
+            <div class="table-responsive" id="individualCaseTableDiv">
               <table class="table table-bordered" id="individualCaseTable" width="100%" cellspacing="0">
                 <thead>
                   <tr>
