@@ -149,34 +149,7 @@ function draw(graphConfig, logScale) {
 		var chart = new Chart(graphConfig.graphTarget, {
 			type: graphConfig.type,
 			data: graphConfig.chartdata,
-			options: {
-				scales: {
-					xAxes: [{
-						time: {
-							unit: graphConfig.unit
-						},
-						gridLines: {
-							display: false
-						},
-						ticks: {
-							maxTicksLimit: 7
-						}
-					}],
-					yAxes: [{
-						ticks: {
-							min: 0,
-							maxTicksLimit: 5
-						},
-						gridLines: {
-							color: "rgba(0, 0, 0, .125)",
-						},
-						type: logScale ? 'logarithmic' : 'linear',
-					}],
-				},
-				legend: {
-					display: false
-				}
-			}
+			options: options
 		});
 		graphConfig.graphTarget.data('chart', chart)
 	}
