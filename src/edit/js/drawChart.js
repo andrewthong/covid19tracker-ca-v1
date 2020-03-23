@@ -20,7 +20,8 @@ function toShortFormat(dt) {
 // @param data: {} case information
 // @param data: str id for the graph
 // @param data: boolean differntiate b/w summing vs appending
-function lineGraph(data, id, flag) {
+// @param logScale: boolean whether to plot linear or log y axis
+function lineGraph(data, id, flag, logScale) {
 	var name = [];
 	var marks = [];
 	var sum = 0;
@@ -65,7 +66,7 @@ function lineGraph(data, id, flag) {
 	}
 
 	// renders the graph
-	draw(graphConfig);
+	draw(graphConfig, logScale);
 
 }
 
@@ -104,42 +105,80 @@ function barGraph(data, id) {
 }
 
 
-// draw: renders the graph to HTML
+// draw: renders or updates the graph
 // @param graphConfig: {} config for graph
-function draw(graphConfig) {
-	Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-	Chart.defaults.global.defaultFontColor = '#292b2c';
-
-	var chart = new Chart(graphConfig.graphTarget, {
-		type: graphConfig.type,
-		data: graphConfig.chartdata,
-		options: {
-			scales: {
-				xAxes: [{
-					time: {
-						unit: graphConfig.unit
-					},
-					gridLines: {
-						display: false
-					},
-					ticks: {
-						maxTicksLimit: 7
-					}
-				}],
-				yAxes: [{
-					ticks: {
-						min: 0,
-						maxTicksLimit: 5
-					},
-					gridLines: {
-						color: "rgba(0, 0, 0, .125)",
-					}
-				}],
-			},
-			legend: {
-				display: false
-			}
+// @param logScale: boolean whether to plot linear or log y axis
+function draw(graphConfig, logScale) {
+	const options = {
+		scales: {
+			xAxes: [{
+				time: {
+					unit: graphConfig.unit
+				},
+				gridLines: {
+					display: false
+				},
+				ticks: {
+					maxTicksLimit: 7
+				}
+			}],
+			yAxes: [{
+				ticks: {
+					min: 0,
+					maxTicksLimit: 5
+				},
+				gridLines: {
+					color: "rgba(0, 0, 0, .125)",
+				},
+				type: logScale ? 'logarithmic' : 'linear',
+			}],
+		},
+		legend: {
+			display: false
 		}
-	});
+	}
+	const currentChart = graphConfig.graphTarget.data('chart');
+	if (currentChart) {
+		console.log(currentChart)
+		currentChart.options = options;
+		currentChart.update();
+	} else {
+		Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+		Chart.defaults.global.defaultFontColor = '#292b2c';
+
+		var chart = new Chart(graphConfig.graphTarget, {
+			type: graphConfig.type,
+			data: graphConfig.chartdata,
+			options: {
+				scales: {
+					xAxes: [{
+						time: {
+							unit: graphConfig.unit
+						},
+						gridLines: {
+							display: false
+						},
+						ticks: {
+							maxTicksLimit: 7
+						}
+					}],
+					yAxes: [{
+						ticks: {
+							min: 0,
+							maxTicksLimit: 5
+						},
+						gridLines: {
+							color: "rgba(0, 0, 0, .125)",
+						},
+						type: logScale ? 'logarithmic' : 'linear',
+					}],
+				},
+				legend: {
+					display: false
+				}
+			}
+		});
+		graphConfig.graphTarget.data('chart', chart)
+	}
 
 }
