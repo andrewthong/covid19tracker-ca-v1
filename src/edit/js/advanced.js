@@ -29,6 +29,7 @@ function getProvinceData(province) {
 
 		// update datatable of individual Cases
 		$('#individualCaseTable').dataTable({
+			"order": [[0, "desc"]],
 			"destroy": true,
 			"data": res["data"]["cases"],
 			"columns": [{
