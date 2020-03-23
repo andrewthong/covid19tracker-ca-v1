@@ -70,7 +70,19 @@ class Cases {
   }
 
   public function casesByProvince(){
-    $query = "SELECT COUNT(province) AS cases, province, source FROM new_case GROUP BY province ORDER BY cases DESC";
+    $query = "SELECT COUNT(province) AS cases, province, source FROM new_case GROUP BY province, source ORDER BY cases DESC";
+    $result = $this->getQry($query);
+
+    if($result->rowCount() > 0) {
+      $row = $result->fetchAll(PDO::FETCH_ASSOC);
+      return $row;
+    }
+
+    return "";
+  }
+
+  public function totalCaseProvince(){
+    $query = "SELECT province, COUNT(province) AS cases FROM new_case GROUP BY province HAVING COUNT(province) > 1 ORDER  BY cases DESC";
     $result = $this->getQry($query);
 
     if($result->rowCount() > 0) {

@@ -29,38 +29,50 @@ $(document).ready(() => {
 			mapKeys[simplemaps_canadamap_mapdata['state_specific'][key].name] = key;
 		})
 
-		console.log(mapKeys)
 
+
+		var casesByProvince = {};
 		res["casesByProvince"].forEach(r => {
-			var calc = Math.round((parseInt(r.cases) / parseInt(res["casePerPopulation"][r.province]) * 100)) / 100;
+			if (r.province in casesByProvince) {
+				casesByProvince[r.province]["cases"] += parseInt(r.cases);
+				casesByProvince[r.province]["deaths"] += parseInt(r.cases);
+			} else {
+				casesByProvince[r.province] = r;
+				casesByProvince[r.province]["cases"] = parseInt(casesByProvince[r.province]["cases"]);
+				casesByProvince[r.province]["deaths"] = parseInt(casesByProvince[r.province]["deaths"]);
+			}
+
+		})
+
+		for (var province in casesByProvince) {
+
+			var calc = Math.round((parseInt(casesByProvince[province]["cases"]) / parseInt(res["casePerPopulation"][province]) * 100)) / 100;
 			if (isNaN(calc))
 				calc = 0;
 
-			if (r.province == "Northwest Territories")
+			if (province == "Northwest Territories")
 				calc = 2.44;
 
 			$('#totalCasesProvinceTable').append(
 				"<tr>" +
-				"<td onClick='loadProvinceData(\"" + r.province + "\")'>" + r.province + "</td>" +
-				"<td><b><i>" + r.cases + "</i></b></td>" +
+				"<td>" + province + "</td>" +
+				"<td><b><i>" + casesByProvince[province]["cases"] + "</i></b></td>" +
 				"<td>" + calc + "</td>" +
-				"<td>" + r.deaths + "</td>" +
-				"<td><a href='" + r.source + "'>Source</a></td>" +
+				"<td>" + casesByProvince[province]["deaths"] + "</td>" +
+				"<td><a href='" + casesByProvince[province]["source"] + "'>Source</a></td>" +
 				"</tr>"
 			)
 
-			if (r.province in mapKeys) {
-				console.log(r.province, r.cases, r.deaths)
-				simplemaps_canadamap_mapdata.state_specific[mapKeys[r.province]].description = r.cases + " Cases" + "<br>" + r.deaths + " deaths";
+			if (province in mapKeys) {
+				simplemaps_canadamap_mapdata.state_specific[mapKeys[province]].description = casesByProvince[province]["cases"] + " Cases" + "<br>" + casesByProvince[province]["deaths"] + " deaths";
 			}
-
-		})
+		}
 
 		simplemaps_canadamap.refresh();
 
 		lineGraph(res["cumulativeCases"], "#cumulativeCaseChart", true);
 		lineGraph(res["dailyCases"], "#dailyCaseChart", false);
-		barGraph(res["casesByProvince"], "#provinceCasesChart");
+		barGraph(res["totalCaseProvince"], "#provinceCasesChart");
 
 		$('#individualCaseTable').dataTable({
 			"data": res["individualCases"],
@@ -96,32 +108,32 @@ $(document).ready(() => {
 
 });
 
-function loadProvinceData(province) {
-	$.ajax({
-		url: "http://localhost/edit/api/controller/province.php",
-		type: "POST",
-		data: JSON.stringify({
-			province: province
-		})
-	}).then(res => {
-		console.log(res)
-
-		$('#displayCumulative').remove()
-		$('#displayMap').remove()
-
-		$('#newCasesByDay')[0].innerHTML = province + " New Cases by Day";
-		$('#newCasesByProvince')[0].innerHTML = province + " Cumulative Cases";
-
-		$('#dailyCaseChart').remove();
-		$('#provinceCasesChart').remove();
-
-		$('#dailyCaseChartDiv').append("<canvas id=\"dailyCaseChart\" width=\"100%\" height=\"40\"></canvas>")
-		$('#provinceCasesChartDiv').append("<canvas id=\"provinceCasesChart\" width=\"100%\" height=\"40\"></canvas>")
-
-		lineGraph(res["dailyCases"], "#dailyCaseChart", false);
-		lineGraph(res["cumulativeCases"], "#provinceCasesChart", true);
-
-	}, err => {
-		console.log(err)
-	})
-}
+// function loadProvinceData(province) {
+// 	$.ajax({
+// 		url: "http://localhost/edit/api/controller/province.php",
+// 		type: "POST",
+// 		data: JSON.stringify({
+// 			province: province
+// 		})
+// 	}).then(res => {
+// 		console.log(res)
+//
+// 		$('#displayCumulative').remove()
+// 		$('#displayMap').remove()
+//
+// 		$('#newCasesByDay')[0].innerHTML = province + " New Cases by Day";
+// 		$('#newCasesByProvince')[0].innerHTML = province + " Cumulative Cases";
+//
+// 		$('#dailyCaseChart').remove();
+// 		$('#provinceCasesChart').remove();
+//
+// 		$('#dailyCaseChartDiv').append("<canvas id=\"dailyCaseChart\" width=\"100%\" height=\"40\"></canvas>")
+// 		$('#provinceCasesChartDiv').append("<canvas id=\"provinceCasesChart\" width=\"100%\" height=\"40\"></canvas>")
+//
+// 		lineGraph(res["dailyCases"], "#dailyCaseChart", false);
+// 		lineGraph(res["cumulativeCases"], "#provinceCasesChart", true);
+//
+// 	}, err => {
+// 		console.log(err)
+// 	})
+// }

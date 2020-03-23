@@ -33,6 +33,7 @@ $return_data['dailyCases'] = $cases->dailyCases();
 $return_data['casesByProvince'] = $cases->casesByProvince();
 $return_data['deathsByProvince'] = $cases->deathsByProvince();
 $return_data['individualCases'] = $cases->individualCases();
+$return_data['totalCaseProvince'] = $cases->totalCaseProvince();
 
 
 
