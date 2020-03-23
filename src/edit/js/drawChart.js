@@ -1,3 +1,6 @@
+// toShortFormat: converts dates to short format
+// @param dt: str  a date
+// @return: str shortDateFormat
 function toShortFormat(dt) {
 	var month_names = ["Jan", "Feb", "Mar",
 		"Apr", "May", "Jun",
@@ -12,15 +15,18 @@ function toShortFormat(dt) {
 	return "" + month_names[month_index] + " " + day;
 }
 
+
+// lineGraph: configures data for line graphs
+// @param data: {} case information
+// @param data: str id for the graph
+// @param data: boolean differntiate b/w summing vs appending
 function lineGraph(data, id, flag) {
 	var name = [];
 	var marks = [];
 	var sum = 0;
 	for (var i in data) {
 		var ddate = data[i].dte;
-
 		var cdate = toShortFormat(new Date(ddate));
-
 		name.push(cdate);
 
 		if (flag) {
@@ -32,6 +38,7 @@ function lineGraph(data, id, flag) {
 		}
 	}
 
+	// used to setup graph that needs to be drawn
 	var graphConfig = {
 		graphTarget: $(id),
 		type: 'line',
@@ -57,12 +64,15 @@ function lineGraph(data, id, flag) {
 		}
 	}
 
-
-
+	// renders the graph
 	draw(graphConfig);
 
 }
 
+
+// barGraph: configures data for bar graphs
+// @param data: {} case information
+// @param data: str id for the graph
 function barGraph(data, id) {
 
 	var name = [];
@@ -72,7 +82,6 @@ function barGraph(data, id) {
 		name.push(data[i].province);
 		marks.push(data[i].cases);
 	}
-
 
 	var graphConfig = {
 		graphTarget: $(id),
@@ -89,10 +98,14 @@ function barGraph(data, id) {
 		}
 	}
 
+	// renders the graph
 	draw(graphConfig);
 
 }
 
+
+// draw: renders the graph to HTML
+// @param graphConfig: {} config for graph
 function draw(graphConfig) {
 	Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 	Chart.defaults.global.defaultFontColor = '#292b2c';

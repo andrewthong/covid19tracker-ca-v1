@@ -12,13 +12,10 @@ header('Content-type: application/json');
 $json = file_get_contents("php://input");
 $data = json_decode($json, true);
 
-
-
 $database = new Database();
 $db = $database->getConnection();
 
 $cases = new Cases($db);
-
 
 $return_data = array();
 
@@ -29,7 +26,3 @@ $return_data['cumulativeCases'] = $cases->getProvinceCumulativeCases($data['prov
 
 
 echo json_encode($return_data);
-
-
-
-?>

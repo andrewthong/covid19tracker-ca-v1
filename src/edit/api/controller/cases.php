@@ -17,8 +17,8 @@ $db = $database->getConnection();
 
 $cases = new Cases($db);
 
+// data needed
 $return_data = array();
-
 
 $return_data['casePerPopulation'] = array( 'Ontario' => '134', 'Quebec' => '82', 'British Columbia' => '46',
   'Alberta' => '41', 'Manitoba' => '13', 'Saskatchewan' => '11', 'Nova Scotia' => '9.7','New Brunswick' => '7.5',
@@ -39,7 +39,3 @@ $return_data['totalCaseProvince'] = $cases->totalCaseProvince();
 
 // print_r($return_data);
 echo json_encode($return_data);
-
-
-
-?>
