@@ -23,6 +23,14 @@ $(document).ready(() => {
 
 		$('#infectedPerCanada')[0].innerHTML = Math.round((parseInt(res["totalCases"]["cases"]) / parseInt(res["casePerPopulation"]["Canada"]) * 100)) / 100;
 
+		var mapKeys = {};
+
+		Object.keys(simplemaps_canadamap_mapdata['state_specific']).forEach(key => {
+			mapKeys[simplemaps_canadamap_mapdata['state_specific'][key].name] = key;
+		})
+
+		console.log(mapKeys)
+
 		res["casesByProvince"].forEach(r => {
 			var calc = Math.round((parseInt(r.cases) / parseInt(res["casePerPopulation"][r.province]) * 100)) / 100;
 			if (isNaN(calc))
@@ -40,7 +48,15 @@ $(document).ready(() => {
 				"<td><a href='" + r.source + "'>Source</a></td>" +
 				"</tr>"
 			)
+
+			if (r.province in mapKeys) {
+				console.log(r.province, r.cases, r.deaths)
+				simplemaps_canadamap_mapdata.state_specific[mapKeys[r.province]].description = r.cases + " Cases" + "<br>" + r.deaths + " deaths";
+			}
+
 		})
+
+		simplemaps_canadamap.refresh();
 
 		lineGraph(res["cumulativeCases"], "#cumulativeCaseChart", true);
 		lineGraph(res["dailyCases"], "#dailyCaseChart", false);
@@ -74,7 +90,6 @@ $(document).ready(() => {
 				}
 			]
 		});
-
 	}, err => {
 		console.log(err)
 	})

@@ -170,8 +170,6 @@ class Cases {
     return "";
   }
 
-
-
   public function getQry($query){
     try {
       $stmt = $this->conn->prepare($query);

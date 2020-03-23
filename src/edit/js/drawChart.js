@@ -57,6 +57,8 @@ function lineGraph(data, id, flag) {
 		}
 	}
 
+
+
 	draw(graphConfig);
 
 }
