@@ -3,6 +3,8 @@
 include_once '../config/database.php';
 include_once '../entities/cases.php';
 
+$config = include('../config/configs.php');
+
 // header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
 header('Access-Control-Max-Age: 1000');
@@ -13,7 +15,7 @@ $json = file_get_contents("php://input");
 $data = json_decode($json, true);
 
 $database = new Database();
-$db = $database->getConnection();
+$db = $database->getConnection($config);
 
 $cases = new Cases($db);
 

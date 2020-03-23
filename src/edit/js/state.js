@@ -3,7 +3,7 @@ $(document).ready(() => {
 
 	// on load make GET request to load all info required for index page
 	$.ajax({
-		url: "http://localhost/edit/api/controller/cases.php",
+		url: "http://localhost/Covid19TrackerCA/src/edit/api/controller/cases.php",
 		type: "GET",
 	}).then(res => {
 		console.log(res)
