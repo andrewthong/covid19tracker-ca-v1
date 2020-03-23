@@ -23,9 +23,9 @@ $(document).ready(() => {
 			else
 				r['deaths'] = 0;
 
-			death_sum += res['deathsByProvince'][r.province];
+			death_sum += (res['deathsByProvince'][r.province]);
 		});
-
+		
 		// total infected from canada
 		$('#infectedPerCanada')[0].innerHTML = Math.round((parseInt(res["totalCases"]["cases"]) / parseInt(res["casePerPopulation"]["Canada"]) * 100)) / 100;
 
@@ -49,7 +49,8 @@ $(document).ready(() => {
 			}
 
 		})
-
+		
+		var deaths_total = 0;
 		// update total case by providence per 100,00
 		for (var province in casesByProvince) {
 			var calc = Math.round((parseInt(casesByProvince[province]["cases"]) / parseInt(res["casePerPopulation"][province]) * 100)) / 100;
@@ -71,6 +72,8 @@ $(document).ready(() => {
 				"</tr>"
 			)
 
+			deaths_total += parseInt(casesByProvince[province]["deaths"]);
+
 			// update the maps info
 			if (province in mapKeys) {
 				simplemaps_canadamap_mapdata.state_specific[mapKeys[province]].description = casesByProvince[province]["cases"] + " Cases" + "<br>" + casesByProvince[province]["deaths"] + " deaths";
@@ -79,6 +82,8 @@ $(document).ready(() => {
 
 		simplemaps_canadamap.refresh();
 
+		$('#totalDeath')[0].innerHTML = deaths_total + " ";
+		$('.death_total')[0].innerHTML = deaths_total;
 		// draw 3 main graphs
 		lineGraph(res["cumulativeCases"], "#cumulativeCaseChart", true);
 		lineGraph(res["dailyCases"], "#dailyCaseChart", false);

@@ -1,0 +1,36 @@
+[23-Mar-2020 15:18:14 America/New_York] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/ausrwmfh/public_html/edit/api/entities/cases.php:196
+Stack trace:
+#0 /home/ausrwmfh/public_html/edit/api/entities/cases.php(18): Cases->getQry('SELECT `date` F...')
+#1 /home/ausrwmfh/public_html/edit/api/controller/cases.php(31): Cases->lastUpdated()
+#2 {main}
+  thrown in /home/ausrwmfh/public_html/edit/api/entities/cases.php on line 196
+[23-Mar-2020 15:18:19 America/New_York] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/ausrwmfh/public_html/edit/api/entities/cases.php:196
+Stack trace:
+#0 /home/ausrwmfh/public_html/edit/api/entities/cases.php(18): Cases->getQry('SELECT `date` F...')
+#1 /home/ausrwmfh/public_html/edit/api/controller/cases.php(31): Cases->lastUpdated()
+#2 {main}
+  thrown in /home/ausrwmfh/public_html/edit/api/entities/cases.php on line 196
+[23-Mar-2020 15:18:23 America/New_York] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/ausrwmfh/public_html/edit/api/entities/cases.php:196
+Stack trace:
+#0 /home/ausrwmfh/public_html/edit/api/entities/cases.php(18): Cases->getQry('SELECT `date` F...')
+#1 /home/ausrwmfh/public_html/edit/api/controller/cases.php(31): Cases->lastUpdated()
+#2 {main}
+  thrown in /home/ausrwmfh/public_html/edit/api/entities/cases.php on line 196
+[23-Mar-2020 15:18:27 America/New_York] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/ausrwmfh/public_html/edit/api/entities/cases.php:196
+Stack trace:
+#0 /home/ausrwmfh/public_html/edit/api/entities/cases.php(145): Cases->getQry('SELECT *, DATE_...')
+#1 /home/ausrwmfh/public_html/edit/api/controller/province.php(24): Cases->getProvinceData('Manitoba')
+#2 {main}
+  thrown in /home/ausrwmfh/public_html/edit/api/entities/cases.php on line 196
+[23-Mar-2020 15:19:00 America/New_York] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/ausrwmfh/public_html/edit/api/entities/cases.php:196
+Stack trace:
+#0 /home/ausrwmfh/public_html/edit/api/entities/cases.php(145): Cases->getQry('SELECT *, DATE_...')
+#1 /home/ausrwmfh/public_html/edit/api/controller/province.php(24): Cases->getProvinceData('Manitoba')
+#2 {main}
+  thrown in /home/ausrwmfh/public_html/edit/api/entities/cases.php on line 196
+[23-Mar-2020 15:19:03 America/New_York] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/ausrwmfh/public_html/edit/api/entities/cases.php:196
+Stack trace:
+#0 /home/ausrwmfh/public_html/edit/api/entities/cases.php(18): Cases->getQry('SELECT `date` F...')
+#1 /home/ausrwmfh/public_html/edit/api/controller/cases.php(31): Cases->lastUpdated()
+#2 {main}
+  thrown in /home/ausrwmfh/public_html/edit/api/entities/cases.php on line 196
