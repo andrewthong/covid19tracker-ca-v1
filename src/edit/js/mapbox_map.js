@@ -1,6 +1,6 @@
 var map;
-console.log(window.location)
-var isAdvancedMap = window.location.indexOf('advanced') > -1;
+var popup;
+var isAdvancedMap = window.location.href.indexOf('advanced') > -1;
 
 function makeMap(data) {
   mapboxgl.accessToken = 'pk.eyJ1IjoibWFwc3RlcnRlY2giLCJhIjoiY2s4M2U4eGJmMWJlejNsb3EyOXV4Zm1zaiJ9.aLWnB4UTvCto0wF5_9fePg';
@@ -12,8 +12,10 @@ function makeMap(data) {
       [-48.30904150845262, 68.77550837439571]
     ]
   });
-
-  console.log(data);
+  popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  })
 
   map.on('load', () => {
     addProvinces(data);
@@ -33,6 +35,7 @@ function addIndividualCases(data) {
     var high = 0;
 
     resp.features.forEach(feature => {
+      feature.id = Math.random()*100;
       var theseCases = data.individualCases.filter(covidCase => covidCase.city===feature.properties.city&&covidCase.province===feature.properties.province);
       feature.properties.total_cases = theseCases.length;
       feature.properties.cases = theseCases;
@@ -41,7 +44,6 @@ function addIndividualCases(data) {
       }
     })
 
-    console.log(high);
     var radiusPaint = [
       'interpolate',
       ['linear'],
@@ -59,14 +61,47 @@ function addIndividualCases(data) {
       source : 'covid-cases',
       type : 'circle',
       paint : {
-        'circle-color' : '#eee',
+        'circle-color' : '#333',
         'circle-radius' : radiusPaint,
-        'circle-stroke-color' : '#333',
+        'circle-stroke-color' : '#eee',
         'circle-stroke-width' : 2
       },
       layout : {
       }
     })
+
+    var hoveredStateId = false;
+    map.on('mousemove', 'covid-cases', (e) => {
+      if (e.features.length > 0) {
+        if (hoveredStateId) {
+          map.setFeatureState(
+            { source: 'covid-cases', id: hoveredStateId },
+            { hover: false }
+          );
+        }
+        hoveredStateId = e.features[0].id;
+        map.setFeatureState(
+          { source: 'covid-cases', id: hoveredStateId },
+          { hover: true }
+        );
+      }
+
+      var properties = e.features[0].properties;
+      popup.setLngLat([e.lngLat.lng, e.lngLat.lat]).setHTML(`
+        <center><strong>${properties.city}</strong><br />
+        Total Cases : ${properties.total_cases} <br />
+      `).addTo(map);
+    })
+    map.on('mouseleave', 'covid-cases', function() {
+      if (hoveredStateId) {
+        map.setFeatureState(
+          { source: 'covid-cases', id: hoveredStateId },
+          { hover: false }
+        );
+      }
+      popup.remove();
+      hoveredStateId = null;
+    });
 
   })
 }
@@ -123,7 +158,7 @@ function addProvinces(data) {
       fillRange[1]*0.9, '#D2222D'
     ];
 
-    document.getElementById('map-overlay').innerHTML = `
+    var mapHTML = `
       <strong>Cases Per Capita</strong>
       <ul>
         <li><div class="color-swatch" style="background-color: #007000"></div> Low</li>
@@ -132,6 +167,25 @@ function addProvinces(data) {
       </ul>
       <p>See more on <a href="advanced.html">Advanced Map</a>.</p>
     `;
+    if(isAdvancedMap) {
+      mapHTML = `
+        <h3>Legend</h3>
+        <strong>Cases Per Capita</strong>
+        <ul>
+          <li><div class="color-swatch" style="background-color: #007000"></div> Low</li>
+          <li><div class="color-swatch" style="background-color: #FFbF00"></div> Mid</li>
+          <li><div class="color-swatch" style="background-color: #D2222D"></div> High</li>
+        </ul>
+        <hr />
+        <strong>Affected Cities</strong>
+        <div style="display:flex;"><div class="circle-swatch"></div> <p>Affected Cities</p></div>
+        <hr />
+        <strong>Case Origins</strong>
+        <button class="btn btn-secondary btn-sm">Country of Origin</button>
+      `;
+    }
+
+    document.getElementById('map-overlay').innerHTML = mapHTML;
 
     map.addLayer({
       id : 'provinces-fill',
@@ -146,7 +200,7 @@ function addProvinces(data) {
           0.3
         ]
       }
-    })
+    }, map.getSource('covid-cases') ? 'covid-cases': null)
 
     map.addLayer({
       id : 'provinces-label',
@@ -199,10 +253,6 @@ function addProvinces(data) {
     })
 
     var hoveredStateId = false;
-    var popup = new mapboxgl.Popup({
-      closeButton: false,
-      closeOnClick: false
-    })
     map.on('mousemove', 'provinces-fill', (e) => {
       if (e.features.length > 0) {
         if (hoveredStateId) {
@@ -218,12 +268,15 @@ function addProvinces(data) {
         );
       }
 
-      var properties = e.features[0].properties;
-      popup.setLngLat([e.lngLat.lng, e.lngLat.lat]).setHTML(`
-        <center><strong>${properties.name}</strong><br />
-        Total Cases : ${properties.province_cases_total} <br />
-        Total Deaths : ${properties.province_deaths_total} </center>
-      `).addTo(map);
+
+      if(!isAdvancedMap) {
+        var properties = e.features[0].properties;
+        popup.setLngLat([e.lngLat.lng, e.lngLat.lat]).setHTML(`
+          <center><strong>${properties.name}</strong><br />
+          Total Cases : ${properties.province_cases_total} <br />
+          Total Deaths : ${properties.province_deaths_total} </center>
+        `).addTo(map);
+      }
     })
     map.on('mouseleave', 'provinces-fill', function() {
       if (hoveredStateId) {
@@ -232,7 +285,9 @@ function addProvinces(data) {
           { hover: false }
         );
       }
-      popup.remove();
+      if(!isAdvancedMap) {
+        popup.remove();
+      }
       hoveredStateId = null;
     });
   })

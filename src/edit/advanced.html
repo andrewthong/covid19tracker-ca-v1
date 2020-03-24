@@ -16,6 +16,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
+  <script type="text/javascript" src="js/mapbox_map.js"></script>
   <script src="assets/demo/datatables-demo.js"></script>
   <!-- <script type="text/javascript" src="js/mapdata.js"></script> -->
   <!-- <script type="text/javascript" src="js/canadamap.js"></script> -->
@@ -93,6 +96,18 @@
                     </path>
                   </svg><!-- <i class="fas fa-angle-right"></i> -->
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="card mb-4">
+              <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Advanced Map</div>
+              <div class="card-body" style="padding:0px;">
+                <div id="map" class="advanced"></div>
+                <div id="map-overlay" class="advanced"></div>
               </div>
             </div>
           </div>

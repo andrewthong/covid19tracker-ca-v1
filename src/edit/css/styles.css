@@ -10223,6 +10223,9 @@ body {
   height: 358px;
   width: 100%;
 }
+#map.advanced {
+  height: 500px;
+}
 #map-overlay {
   position: absolute;
   right: 0;
@@ -10255,4 +10258,12 @@ body {
 #map-overlay p {
   font-size: 10px;
   margin-bottom: 0px;
+}
+#map-overlay .circle-swatch {
+  border-radius: 50%;
+  background: #333;
+  height: 12px;
+  margin-right: 5px;
+  margin-top: 2px;
+  width: 12px;
 }
