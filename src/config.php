@@ -1,7 +1,11 @@
 <?php
+// $servername = "localhost";
+// $username = "ausrwmfh_database";
+// $password = "**********";
+// $dbname = "ausrwmfh_database";
 $servername = "localhost";
-$username = "ausrwmfh_database";
-$password = "**********";
+$username = "root";
+$password = "root";
 $dbname = "ausrwmfh_database";
 /* $servername = "localhost";
 $username = "root";

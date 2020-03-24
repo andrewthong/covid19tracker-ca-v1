@@ -118,7 +118,7 @@ function addProvinces(data) {
       feature.id = feature.properties.cartodb_id;
       var provinceData = data.totalCaseProvince.filter(item => item.province===feature.properties.name);
       feature.properties.province_cases_total = provinceData.length>0 ? provinceData[0].cases : '';
-      feature.properties.province_cases_per_population = provinceData.length>0 ? provinceData[0].cases/feature.properties.population : 0;
+      feature.properties.province_cases_per_population = provinceData.length>0 ? provinceData[0].cases/(feature.properties.population/100000) : 0;
       if(data.deathsByProvince[feature.properties.name]) {
         feature.properties.province_deaths_total = data.deathsByProvince[feature.properties.name];
       } else {
@@ -159,12 +159,14 @@ function addProvinces(data) {
     ];
 
     var mapHTML = `
-      <strong>Cases Per Capita</strong>
+      <strong>Cases Per 100,000</strong>
+      <div class="gradient-swatch"></div>
       <ul>
-        <li><div class="color-swatch" style="background-color: #007000"></div> Low</li>
-        <li><div class="color-swatch" style="background-color: #FFbF00"></div> Mid</li>
-        <li><div class="color-swatch" style="background-color: #D2222D"></div> High</li>
+        <li style="text-align:left;">${fillRange[0].toFixed(1)}</li>
+        <li style="text-align:center;">${(fillRange[1]*0.5).toFixed(1)}</li>
+        <li style="text-align: right;">${fillRange[1].toFixed(1)}</li>
       </ul>
+      <p>Total cases to date in red.</p>
       <p>See more on <a href="advanced.html">Advanced Map</a>.</p>
     `;
     if(isAdvancedMap) {
@@ -203,23 +205,6 @@ function addProvinces(data) {
     }, map.getSource('covid-cases') ? 'covid-cases': null)
 
     map.addLayer({
-      id : 'provinces-label',
-      type : 'symbol',
-      source : 'provinces-centroids',
-      layout : {
-        'text-field' : ["get", "abbreviation"],
-        'text-size' : 15,
-        'text-offset' : [0, -0.6],
-        // 'text-allow-overlap' : true,
-        // 'text-ignore-placement' : true
-      },
-      paint : {
-        'text-color' : '#333',
-        'text-halo-color' : '#FFF',
-        'text-halo-width' : 2
-      }
-    })
-    map.addLayer({
       id : 'provinces-cases',
       type : 'symbol',
       source : 'provinces-centroids',
@@ -228,10 +213,27 @@ function addProvinces(data) {
         'text-size' : 12,
         'text-offset' : [0, 0.6],
         // 'text-allow-overlap' : true,
-        'text-ignore-placement' : true
+        // 'text-ignore-placement' : true
       },
       paint : {
         'text-color' : '#b22525',
+        'text-halo-color' : '#FFF',
+        'text-halo-width' : 2
+      }
+    })
+    map.addLayer({
+      id : 'provinces-label',
+      type : 'symbol',
+      source : 'provinces-centroids',
+      layout : {
+        'text-field' : ["get", "abbreviation"],
+        'text-size' : 15,
+        'text-offset' : [0, -0.6],
+        // 'text-allow-overlap' : true,
+        'text-ignore-placement' : true
+      },
+      paint : {
+        'text-color' : '#333',
         'text-halo-color' : '#FFF',
         'text-halo-width' : 2
       }

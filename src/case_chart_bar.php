@@ -7,6 +7,8 @@ $sqlQuery = "SELECT `id`,`province`, `city`, `age`, `travel_history`, `confirmed
 
 $result = mysqli_query($conn,$sqlQuery);
 
+var_dump($result);
+
 $data = array();
 foreach ($result as $row) {
 	$data[] = $row;
