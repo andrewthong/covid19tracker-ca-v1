@@ -1,5 +1,6 @@
 var map;
 var popup;
+var allCountries;
 var isAdvancedMap = window.location.href.indexOf('advanced') > -1;
 
 function makeMap(data) {
@@ -19,10 +20,35 @@ function makeMap(data) {
 
   map.on('load', () => {
     addProvinces(data);
+    console.log(data);
     if(isAdvancedMap) {
       addIndividualCases(data);
+      addCountries();
+      addSearch();
     }
   })
+}
+
+function addCountries() {
+  fetch('./assets/data/countries.json').then(response => response.json()).then(resp => {
+    allCountries = {};
+    resp.features.forEach(feature => {
+      allCountries[feature.properties.name] = feature;
+    })
+  });
+}
+
+function addSearch() {
+  var geocoder = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl
+  });
+  var geocoder = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl,
+    placeholder : 'Search cases near you'
+  })
+  map.addControl(geocoder,'top-left');
 }
 
 function addIndividualCases(data) {
@@ -48,7 +74,7 @@ function addIndividualCases(data) {
       'interpolate',
       ['linear'],
       ["number", ['get', 'total_cases']],
-      1, 5,
+      1, 1,
       high, 20
     ];
 
@@ -61,10 +87,15 @@ function addIndividualCases(data) {
       source : 'covid-cases',
       type : 'circle',
       paint : {
-        'circle-color' : '#333',
+        'circle-color' : [
+          'case',
+          ['boolean', ['feature-state', 'hover'], false],
+          '#fff',
+          '#eee'
+        ],
         'circle-radius' : radiusPaint,
-        'circle-stroke-color' : '#eee',
-        'circle-stroke-width' : 2
+        'circle-stroke-color' : '#000',
+        'circle-stroke-width' : 1
       },
       layout : {
       }
@@ -102,6 +133,14 @@ function addIndividualCases(data) {
       popup.remove();
       hoveredStateId = null;
     });
+    map.on('click', 'covid-cases', (e) => {
+      if (e.features.length > 0) {
+        console.log(e.features[0].properties);
+        var theseCases = JSON.parse(e.features[0].properties.cases);
+        var matchedLocations = [];
+        console.log(allCountries[theseCases[0].travel_history]);
+      }
+    })
 
   })
 }
@@ -109,7 +148,6 @@ function addIndividualCases(data) {
 function addProvinces(data) {
 
   fetch('./assets/data/provinces.json').then(resp => resp.json()).then(response => {
-    console.log(response);
 
     var centroidGeoJSON = { type : "FeatureCollection", features : [] };
     var fillRange = [];
@@ -171,19 +209,10 @@ function addProvinces(data) {
     `;
     if(isAdvancedMap) {
       mapHTML = `
-        <h3>Legend</h3>
-        <strong>Cases Per Capita</strong>
-        <ul>
-          <li><div class="color-swatch" style="background-color: #007000"></div> Low</li>
-          <li><div class="color-swatch" style="background-color: #FFbF00"></div> Mid</li>
-          <li><div class="color-swatch" style="background-color: #D2222D"></div> High</li>
-        </ul>
+        <strong>Map In Progress</strong>
+        <p style="font-size:14px;">Click on any shape for more information.</p>
         <hr />
-        <strong>Affected Cities</strong>
         <div style="display:flex;"><div class="circle-swatch"></div> <p>Affected Cities</p></div>
-        <hr />
-        <strong>Case Origins</strong>
-        <button class="btn btn-secondary btn-sm">Country of Origin</button>
       `;
     }
 

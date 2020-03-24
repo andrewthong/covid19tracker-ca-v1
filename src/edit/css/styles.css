@@ -10237,6 +10237,9 @@ body {
   max-width: 150px;
   box-shadow: 2px 2px 2px #eee;
 }
+#map-overlay.advanced {
+  max-width: 300px;
+}
 #map-overlay ul {
   list-style-type : none;
   padding: 0;
@@ -10267,9 +10270,10 @@ body {
 }
 #map-overlay .circle-swatch {
   border-radius: 50%;
-  background: #333;
+  background: #eee;
+  border: thin solid #333;
   height: 12px;
   margin-right: 5px;
-  margin-top: 2px;
+  /* margin-top: 2px; */
   width: 12px;
 }
