@@ -7,7 +7,8 @@ $(document).ready(() => {
 		// url: "http://localhost/Covid19TrackerCA/src/edit/api/controller/cases.php",
 		type: "GET",
 	}).then(res => {
-		console.log(res)
+		
+		makeMap(res);
 
 		// override last update times + death & case count
 		$('#updateTime')[0].innerHTML = res["lastUpdate"];
@@ -25,7 +26,7 @@ $(document).ready(() => {
 
 			death_sum += (res['deathsByProvince'][r.province]);
 		});
-		
+
 		// total infected from canada
 		$('#infectedPerCanada')[0].innerHTML = Math.round((parseInt(res["totalCases"]["cases"]) / parseInt(res["casePerPopulation"]["Canada"]) * 100)) / 100;
 
@@ -49,7 +50,7 @@ $(document).ready(() => {
 			}
 
 		})
-		
+
 		var deaths_total = 0;
 		// update total case by providence per 100,00
 		for (var province in casesByProvince) {

@@ -10217,3 +10217,42 @@ body {
 #map_inner > div:not(#tt_sm_map) {
   z-index: -1 !important;
 }
+
+
+#map {
+  height: 358px;
+  width: 100%;
+}
+#map-overlay {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 5px;
+  margin-top: 54px;
+  background: white;
+  padding: 5px;
+  max-width: 150px;
+  box-shadow: 2px 2px 2px #eee;
+}
+#map-overlay ul {
+  list-style-type : none;
+  padding: 0;
+  margin-bottom: 5px;
+}
+#map-overlay li {
+  display: flex;
+  font-size: 12px;
+}
+#map-overlay li>div {
+  display: inline-block;
+}
+#map-overlay .color-swatch {
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  margin-top: 2px;
+}
+#map-overlay p {
+  font-size: 10px;
+  margin-bottom: 0px;
+}

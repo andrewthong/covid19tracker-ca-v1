@@ -1,7 +1,7 @@
 <?php
   return (object) array(
     "host" => "localhost",
-    "username" => "ausrwmfh_database",
-    "password" => "Jarrett123",
+    "username" => "root",
+    "password" => "root",
     "db_name" => "ausrwmfh_database"
   );

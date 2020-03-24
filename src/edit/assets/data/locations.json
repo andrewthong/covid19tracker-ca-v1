@@ -1,0 +1,1250 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Toronto",
+        "search_result": "Toronto, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3849,
+          43.6529
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "British Columbia",
+        "city": "Vancouver",
+        "search_result": "Vancouver, British Columbia, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1139,
+          49.2609
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "British Columbia",
+        "city": "Southern Interior Region",
+        "search_result": "British Columbia, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -125,
+          54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "British Columbia",
+        "city": "Fraser Valley Region",
+        "search_result": "Atlin, British Columbia, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -127.944162631415,
+          57.9992753415252
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Quebec",
+        "city": "Montreal",
+        "search_result": "Montréal, Quebec, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.554,
+          45.5088
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "York Region",
+        "search_result": "Etobicoke, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.5656,
+          43.6436
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Waterloo",
+        "search_result": "Waterloo, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.5218,
+          43.4656
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Quebec",
+        "city": "Mont-Laurier",
+        "search_result": "Mont-Laurier, Quebec, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.4974,
+          46.5524
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Alberta",
+        "city": "Calgary",
+        "search_result": "Calgary, Alberta, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0626,
+          51.0531
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Alberta",
+        "city": "Edmonton",
+        "search_result": "Edmonton, Alberta, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.5065,
+          53.5344
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "British Columbia",
+        "city": "Fraser Valley",
+        "search_result": "Fraser Valley B, British Columbia, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.33,
+          49.38
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Peel Region",
+        "search_result": "Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85,
+          50
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Sudbury",
+        "search_result": "Sudbury, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.08,
+          47.77
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Ottawa",
+        "search_result": "Ottawa, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.69,
+          45.421
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Hamilton",
+        "search_result": "Hamilton, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.8678,
+          43.2547
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Quebec",
+        "city": "Mauricie",
+        "search_result": "Québec, Quebec, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2349,
+          46.8257
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "New Brunswick",
+        "city": "Zone 1 (South)",
+        "search_result": "New Brunswick, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66,
+          46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Alberta",
+        "city": "Central Zone",
+        "search_result": "Alberta, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -115,
+          55
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Quebec",
+        "city": "Estrie",
+        "search_result": "Québec, Quebec, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2349,
+          46.8257
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "British Columbia",
+        "city": "Vancouver Island",
+        "search_result": "Vancouver, British Columbia, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1139,
+          49.2609
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Repatriated Canadians",
+        "city": "Canadian Forces Base in Trenton, Ontario",
+        "search_result": "Canadian Forces Base Gagetown, New Brunswick, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.46,
+          45.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Manitoba",
+        "city": "Winnipeg",
+        "search_result": "Winnipeg, Manitoba, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.1667,
+          49.8833
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Saskatchewan",
+        "city": "Saskatoon",
+        "search_result": "Saskatoon, Saskatchewan, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -106.6605,
+          52.1304
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Halton",
+        "search_result": "Hilton, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -83.8832,
+          46.2168
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Niagara",
+        "search_result": "Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85,
+          50
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Northumberland County",
+        "search_result": "Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85,
+          50
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Repatriated Canadians",
+        "city": "Canadian Forces Base Trenton",
+        "search_result": "Canadian Forces Base Gagetown, New Brunswick, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.46,
+          45.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Durham",
+        "search_result": "Ayton, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.9256,
+          44.0537
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Middlesex London",
+        "search_result": "London, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.246,
+          42.9881
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Huron Perth",
+        "search_result": "Perth, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.2469,
+          44.8989
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "New Brunswick",
+        "city": "Southeast Region",
+        "search_result": "New Brunswick, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66,
+          46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Prince Edward Island",
+        "city": "Queens County",
+        "search_result": "Prince Edward Island, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -63,
+          46.25
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "British Columbia",
+        "city": "Interior Region",
+        "search_result": "British Columbia, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -125,
+          54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Northwestern Region",
+        "search_result": "Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85,
+          50
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Eastern Ontario",
+        "search_result": "Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85,
+          50
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Newfoundland and Labrador",
+        "city": "Labrador-Grenfell",
+        "search_result": "Newfoundland and Labrador, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60,
+          53
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Saskatchewan",
+        "city": "Regina",
+        "search_result": "Regina, Saskatchewan, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.6158,
+          50.4481
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Saskatchewan",
+        "city": "Southend",
+        "search_result": "Southend, Saskatchewan, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -103.264659,
+          56.318703
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Peel",
+        "search_result": "Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85,
+          50
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Simcoe Muskoka",
+        "search_result": "Bill's Corners, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.3747,
+          42.8132
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "York",
+        "search_result": "Etobicoke, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.5656,
+          43.6436
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Quebec",
+        "city": "Capitale Nationale",
+        "search_result": "Québec, Quebec, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2349,
+          46.8257
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "New Brunswick",
+        "city": "Pending",
+        "search_result": "New Brunswick, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66,
+          46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Grey Bruce",
+        "search_result": "Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85,
+          50
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Peterborough",
+        "search_result": "Peterborough, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.3273,
+          44.2876
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Nova Scotia",
+        "city": "Halifax",
+        "search_result": "Halifax, Nova Scotia, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -63.575,
+          44.6484
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "British Columbia",
+        "city": "Interior Region*",
+        "search_result": "British Columbia, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -125,
+          54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "British Columbia",
+        "city": "Vancouver Island*",
+        "search_result": "Vancouver, British Columbia, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1139,
+          49.2609
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "British Columbia",
+        "city": "Fraser Valley Region*",
+        "search_result": "Atlin, British Columbia, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -127.944162631415,
+          57.9992753415252
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "British Columbia",
+        "city": "Vancouver*",
+        "search_result": "Vancouver, British Columbia, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1139,
+          49.2609
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "New Brunswick",
+        "city": "Zone 2",
+        "search_result": "New Brunswick, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66,
+          46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Alberta",
+        "city": "North Zone",
+        "search_result": "Alberta, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -115,
+          55
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Alberta",
+        "city": "South Zone",
+        "search_result": "Alberta, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -115,
+          55
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "British Columbia",
+        "city": "Vancouve Island*",
+        "search_result": "Vancouver, British Columbia, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1139,
+          49.2609
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Nova Scotia",
+        "city": "Pending",
+        "search_result": "Nova Scotia, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -63,
+          45
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "New Brunswick",
+        "city": "Zone 3",
+        "search_result": "New Brunswick, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66,
+          46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Kingston",
+        "search_result": "Kingston, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.4803,
+          44.2298
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "British Columbia",
+        "city": "Northern Region",
+        "search_result": "British Columbia, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -125,
+          54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Manitoba",
+        "city": "Southern Region",
+        "search_result": "Division No. 18, Manitoba, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.62,
+          51.19
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Chatham Kent",
+        "search_result": "Chatham-Kent, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.1831,
+          42.4001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Brant",
+        "search_result": "Brant, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.3497,
+          43.1334
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Algoma",
+        "search_result": "Algoma, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.6109,
+          47.3351
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "New Brunswick",
+        "city": "Zone 1",
+        "search_result": "New Brunswick, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66,
+          46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Saskatchewan",
+        "city": "Moose Jaw",
+        "search_result": "Moose Jaw, Saskatchewan, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -105.5409,
+          50.4001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Saskatchewan",
+        "city": "Northern Region",
+        "search_result": "Saskatchewan Landing, Saskatchewan, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -107.8346,
+          50.5001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Alberta",
+        "city": "Northern Region",
+        "search_result": "Alberta Beach, Alberta, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.3572,
+          53.6746
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Haliburton Kawartha",
+        "search_result": "Eagle Lake, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.5087,
+          45.1293
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Quebec",
+        "city": "Bas-Saint-Laurent",
+        "search_result": "Lachine, Quebec, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.681,
+          45.4333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Alberta",
+        "city": "Southern Region",
+        "search_result": "Alberta Beach, Alberta, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.3572,
+          53.6746
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Quebec",
+        "city": "Laval",
+        "search_result": "Laval, Quebec, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.7168,
+          45.6299
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Prince Edward Island",
+        "city": "Queen's County",
+        "search_result": "Prince Edward Island, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -63,
+          46.25
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Saskatchewan",
+        "city": "Central Region",
+        "search_result": "Saskatchewan Landing Provincial Park, Saskatchewan, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -108.028235,
+          50.659761
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Saskatchewan",
+        "city": "Southern Region",
+        "search_result": "Saskatchewan River Forks Recreation Site, Saskatchewan, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -105.084894,
+          53.231201
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Hastings Prince Edward",
+        "search_result": "Prince Edward County, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.2469,
+          44.0316
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Quebec",
+        "city": "Mauricie - Centre du QuÃ©bec",
+        "search_result": "Québec, Quebec, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2349,
+          46.8257
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Quebec",
+        "city": "MontrÃ©al",
+        "search_result": "Montréal, Quebec, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.554,
+          45.5088
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Newfoundland and Labrador",
+        "city": "Pending",
+        "search_result": "Newfoundland and Labrador, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60,
+          53
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Ontario",
+        "city": "Porcupine",
+        "search_result": "Connaught, Ontario, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.9313,
+          48.6161
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Alberta",
+        "city": "Central AB",
+        "search_result": "Alberta Beach, Alberta, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.3572,
+          53.6746
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Alberta",
+        "city": "Southern AB",
+        "search_result": "Alberta Beach, Alberta, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.3572,
+          53.6746
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Alberta",
+        "city": "Northern AB",
+        "search_result": "Alberta Beach, Alberta, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.3572,
+          53.6746
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Northwest Territories",
+        "city": "Pending",
+        "search_result": "Northwest Territories, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119,
+          66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province": "Quebec",
+        "city": "Saguenayâ€“Lac-Saint-Jean",
+        "search_result": "Quebec, Canada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75,
+          48
+        ]
+      }
+    }
+  ]
+}

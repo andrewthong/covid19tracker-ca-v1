@@ -16,9 +16,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@5.1.6/turf.min.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
   <script src="assets/demo/datatables-demo.js"></script>
-  <script type="text/javascript" src="js/mapdata.js"></script>
-  <script type="text/javascript" src="js/canadamap.js"></script>
+  <script type="text/javascript" src="js/mapbox_map.js"></script>
   <script type="text/javascript" src="js/drawChart.js"></script>
   <script type="text/javascript" src="js/state.js"></script>
   <script type="text/javascript" src="js/config.js"></script>
@@ -101,10 +103,9 @@
           <div class="col-xl-6" id="displayMap">
             <div class="card mb-4">
               <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>By Map</div>
-              <div class="card-body">
-                <div class="row">
-                  <div id="map" class="col-md-7 col-sm-12 col-xs-12  mx-auto"></div>
-                </div>
+              <div class="card-body" style="padding:0px;">
+                <div id="map"></div>
+                <div id="map-overlay"></div>
               </div>
             </div>
           </div>
