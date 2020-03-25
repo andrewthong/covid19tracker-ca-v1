@@ -78,8 +78,9 @@ $(document).ready(() => {
 
 
 
-		$('#totalDeath')[0].innerHTML = deaths_total + " ";
-		$('.death_total')[0].innerHTML = deaths_total;
+		// $('#totalDeath')[0].innerHTML = deaths_total + " ";
+		// $('.death_total')[0].innerHTML = deaths_total;
+		
 		// draw 3 main graphs
 		lineGraph(res["cumulativeCases"], "#cumulativeCaseChart", true);
 		lineGraph(res["dailyCases"], "#dailyCaseChart", false);
