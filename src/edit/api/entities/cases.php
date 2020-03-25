@@ -93,7 +93,7 @@ class Cases
     // totalCaseProvince gets sum of cases per province
     public function totalCaseProvince()
     {
-        $query = "SELECT province, COUNT(province) AS cases FROM new_case GROUP BY province HAVING COUNT(province) > 1 ORDER  BY cases DESC";
+        $query = "SELECT C.province, COUNT(C.province) AS cases,(Select count(province) from new_death e where e.province = C.province) as deaths FROM new_case C LEFT JOIN new_death D on C.province = D.province GROUP BY C.province, D.province";
         $result = $this->getQry($query);
 
         if ($result->rowCount() > 0) {
