@@ -230,7 +230,6 @@ function addProvinces(data) {
         <p style="font-size:14px;">Click on any shape for more information.</p>
         <hr />
         <div style="display:flex;"><div class="circle-swatch"></div> <p>Affected Cities</p></div>
-        <div style="display:flex;margin-top:5px;"><div class="circle-swatch"></div> <p>Origin of Infection</p></div>
       `;
     }
 
