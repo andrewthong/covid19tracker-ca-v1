@@ -36,7 +36,7 @@ $(document).ready(() => {
 
 		// calculate deaths & cases per province
 		var casesByProvince = {};
-		res["casesByProvince"].forEach(r => {
+		res["totalCaseProvince"].forEach(r => {
 			if (r.province in casesByProvince) {
 				//casesByProvince[r.province]["cases"] += parseInt(r.cases);
 				//casesByProvince[r.province]["deaths"] += parseInt(r.deaths);
