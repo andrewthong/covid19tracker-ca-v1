@@ -1,10 +1,18 @@
 var removeOptionFlag;
 
 $(document).ready(() => {
-    removeOptionFlag = true;
-    $('#provinceSelection').on('change', function() {
-        getProvinceData(province = this.value);
-    });
+  removeOptionFlag = true;
+	$('#provinceSelection').on('change', function () {
+		getProvinceData(province = this.value);
+	});
+
+	$.ajax({
+		url: url + "api/controller/cases.php",
+		// url: "http://localhost/Covid19TrackerCA/src/edit/api/controller/cases.php",
+		type: "GET",
+	}).then(res => {
+		makeMap(res);
+	});
 })
 
 function getProvinceData(province) {

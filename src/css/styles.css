@@ -10217,3 +10217,9 @@ body {
 #map_inner > div:not(#tt_sm_map) {
   z-index: -1 !important;
 }
+
+
+#map {
+  height: 358px;
+  width: 100%;
+}

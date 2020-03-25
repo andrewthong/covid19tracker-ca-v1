@@ -52,8 +52,11 @@ print_r($lcase_per_population);exit;*/
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="js/mapdata.js"></script>		
-        <script  type="text/javascript" src="js/canadamap.js"></script>
+        <!-- <script type="text/javascript" src="js/mapdata.js"></script>
+        <script  type="text/javascript" src="js/canadamap.js"></script> -->
+        <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
+        <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
+        <script  type="text/javascript" src="js/mapbox_map.js"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160029240-1"></script>
@@ -76,7 +79,7 @@ print_r($lcase_per_population);exit;*/
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                    
+
                         <br>
                         <br>
                         <?php
@@ -120,7 +123,7 @@ print_r($lcase_per_population);exit;*/
                             <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>By Map</div>
-                                    <div class="card-body"><div class="row"><div id="map" class="col-md-7 col-sm-12 col-xs-12  mx-auto"></div></div></div>
+                                    <div class="card-body" style="padding:0px;"><div id="map" ></div></div>
                                 </div>
                             </div>
                             <div class="col-xl-6">
@@ -146,14 +149,14 @@ print_r($lcase_per_population);exit;*/
                             </div>
                         </div>
 
-						
+
                         <div class="card mb-4">
                             <div class="card-header"><i class="fas fa-table mr-1"></i>Total Cases By Province</div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
                                         <thead>
-                                            <tr>                    
+                                            <tr>
                                                 <th>Province</th>
                                                 <th>Total Cases</th>
                                                 <th>Infected per 100 000</th>
@@ -165,12 +168,12 @@ print_r($lcase_per_population);exit;*/
 
                                             <tr>
                                                 <td><i><b>Canada</b></i></td>
-                                                <td><i><b><?php echo mysqli_num_rows($result);  
+                                                <td><i><b><?php echo mysqli_num_rows($result);
 
-                                                    
+
                                                     $sql_total_today = "SELECT id FROM `new_case` WHERE date LIKE '%".date('Y-m-d')."%' ";
                                                     $result_total_today = $conn->query($sql_total_today);
-                                                
+
                                                             if (mysqli_num_rows($result_total_today) != 0) {
                                                                 $result_total_today_val = mysqli_num_rows($result_total_today);
                                                                 echo ' (+'.mysqli_num_rows($result_total_today).' today)';
@@ -179,7 +182,7 @@ print_r($lcase_per_population);exit;*/
 
 
                                                     </i></b></td>
-                        
+
 
 
 
@@ -187,8 +190,8 @@ print_r($lcase_per_population);exit;*/
                                                 <td>
                                                 	<b><?php
                                                 		$getDividedCVal = getDividedVal('canada', $lcase_per_population, mysqli_num_rows($result));
-                                                	
-                                                	
+
+
 														echo $getDividedCVal;
                                                 	?></b>
 
@@ -224,14 +227,14 @@ print_r($lcase_per_population);exit;*/
                                                 	$sql_death_p = "SELECT id FROM `new_death` WHERE province LIKE '%".$g_row["province"]."%'";
 													$result_death_p = $conn->query($sql_death_p);
                                                 ?>
-                                                <td><?php 
+                                                <td><?php
 
                                                 	$lower_province = strtolower($g_row["province"]);
                                                 	$getDividedVal = getDividedVal($lower_province, $lcase_per_population, $g_row["totalGCase"]);
-                                                	
-                                                	
+
+
 													echo $getDividedVal;
-													
+
 
 
                                                 ?></td>
@@ -239,14 +242,14 @@ print_r($lcase_per_population);exit;*/
                                                 <td><a href='<?php echo $g_row["source"]; ?>'>Source</a></td>
                                             </tr>
 											<?php
-												        
+
 												    }
 												} else {
 												    echo "<h5 class='txt-center'>No Data Found</h5>";
 												}
                                         	?>
-                                            
-                                            
+
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -257,7 +260,7 @@ print_r($lcase_per_population);exit;*/
 							function getDividedVal($lower_province, $lcase_per_population, $totalGCase)
 							{
 								if (array_key_exists($lower_province, $lcase_per_population)) {
-													    
+
 								    $dividedVal = ($totalGCase) / ($lcase_per_population[$lower_province]);
 								    return number_format((float)$dividedVal, 2, '.', '');
 								}
@@ -298,7 +301,7 @@ print_r($lcase_per_population);exit;*/
                                         		if (mysqli_num_rows($result) > 0) {
 												    // output data of each row
 												    foreach ($rows as $row) {
-												    		
+
 											?>
 											<tr>
                                                 <td><?php echo $row["id"]; ?></td>
@@ -311,9 +314,9 @@ print_r($lcase_per_population);exit;*/
                                                 <td><a href='<?php echo $row["source"]; ?>'>Source</a></td>
                                             </tr>
 											<?php
-												        
+
 												    }
-												} 
+												}
                                         	?>
                                         </tbody>
                                     </table>
@@ -329,7 +332,7 @@ print_r($lcase_per_population);exit;*/
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; COVID19Tracker.ca 2020</div>
-                            
+
                         </div>
                     </div>
                 </footer>
@@ -352,7 +355,7 @@ print_r($lcase_per_population);exit;*/
 
 		<script>
 
-		  	
+
 
 			var sum = 0;
 			$(".death_sum").each(function() {
@@ -363,12 +366,12 @@ print_r($lcase_per_population);exit;*/
 					sum += parseFloat($(this).html());
 				}
 
-				
+
 
 			});
 			//.toFixed() method will roundoff the final sum to 2 decimal places
 			$(".death_total").html(sum);
-		  
+
 		</script>
 
 		<script>
@@ -376,6 +379,8 @@ print_r($lcase_per_population);exit;*/
             showGraph();
             showGraphArea();
             showGraphArea2();
+
+            makeMap();
         });
 
 
@@ -397,47 +402,47 @@ print_r($lcase_per_population);exit;*/
                 var deaths = <?php echo json_encode($deaths) ?>;
 
                 for(let i=0;i<name.length;i++) {
-                    if(simplemaps_canadamap_mapdata.state_specific.AB.name == name[i])
-                        simplemaps_canadamap_mapdata.state_specific.AB.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
-                    
-                    else if(simplemaps_canadamap_mapdata.state_specific.BC.name == name[i])
-                        simplemaps_canadamap_mapdata.state_specific.BC.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
-                    
-                    else if(simplemaps_canadamap_mapdata.state_specific.SK.name == name[i])
-                        simplemaps_canadamap_mapdata.state_specific.SK.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
-                    
-                    else if(simplemaps_canadamap_mapdata.state_specific.MB.name == name[i])
-                        simplemaps_canadamap_mapdata.state_specific.MB.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
-                    
-                    else if(simplemaps_canadamap_mapdata.state_specific.ON.name == name[i])
-                        simplemaps_canadamap_mapdata.state_specific.ON.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
-                    
-                    else if(simplemaps_canadamap_mapdata.state_specific.QC.name == name[i])
-                        simplemaps_canadamap_mapdata.state_specific.QC.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
-                    
-                    else if(simplemaps_canadamap_mapdata.state_specific.NB.name == name[i])
-                        simplemaps_canadamap_mapdata.state_specific.NB.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
-                    
-                    else if(simplemaps_canadamap_mapdata.state_specific.PE.name == name[i])
-                        simplemaps_canadamap_mapdata.state_specific.PE.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
-                    
-                    else if(simplemaps_canadamap_mapdata.state_specific.NS.name == name[i])
-                        simplemaps_canadamap_mapdata.state_specific.NS.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
-                    
-                    else if(simplemaps_canadamap_mapdata.state_specific.BC.name == name[i])
-                        simplemaps_canadamap_mapdata.state_specific.NL.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
-                    
-                    else if(simplemaps_canadamap_mapdata.state_specific.SK.name == name[i])
-                        simplemaps_canadamap_mapdata.state_specific.NU.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
-                    
-                    else if(simplemaps_canadamap_mapdata.state_specific.MB.name == name[i])
-                        simplemaps_canadamap_mapdata.state_specific.NT.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
-                    
-                    else if(simplemaps_canadamap_mapdata.state_specific.ON.name == name[i])
-                        simplemaps_canadamap_mapdata.state_specific.YT.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
+                    // if(simplemaps_canadamap_mapdata.state_specific.AB.name == name[i])
+                    //     simplemaps_canadamap_mapdata.state_specific.AB.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
+                    //
+                    // else if(simplemaps_canadamap_mapdata.state_specific.BC.name == name[i])
+                    //     simplemaps_canadamap_mapdata.state_specific.BC.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
+                    //
+                    // else if(simplemaps_canadamap_mapdata.state_specific.SK.name == name[i])
+                    //     simplemaps_canadamap_mapdata.state_specific.SK.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
+                    //
+                    // else if(simplemaps_canadamap_mapdata.state_specific.MB.name == name[i])
+                    //     simplemaps_canadamap_mapdata.state_specific.MB.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
+                    //
+                    // else if(simplemaps_canadamap_mapdata.state_specific.ON.name == name[i])
+                    //     simplemaps_canadamap_mapdata.state_specific.ON.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
+                    //
+                    // else if(simplemaps_canadamap_mapdata.state_specific.QC.name == name[i])
+                    //     simplemaps_canadamap_mapdata.state_specific.QC.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
+                    //
+                    // else if(simplemaps_canadamap_mapdata.state_specific.NB.name == name[i])
+                    //     simplemaps_canadamap_mapdata.state_specific.NB.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
+                    //
+                    // else if(simplemaps_canadamap_mapdata.state_specific.PE.name == name[i])
+                    //     simplemaps_canadamap_mapdata.state_specific.PE.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
+                    //
+                    // else if(simplemaps_canadamap_mapdata.state_specific.NS.name == name[i])
+                    //     simplemaps_canadamap_mapdata.state_specific.NS.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
+                    //
+                    // else if(simplemaps_canadamap_mapdata.state_specific.BC.name == name[i])
+                    //     simplemaps_canadamap_mapdata.state_specific.NL.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
+                    //
+                    // else if(simplemaps_canadamap_mapdata.state_specific.SK.name == name[i])
+                    //     simplemaps_canadamap_mapdata.state_specific.NU.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
+                    //
+                    // else if(simplemaps_canadamap_mapdata.state_specific.MB.name == name[i])
+                    //     simplemaps_canadamap_mapdata.state_specific.NT.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
+                    //
+                    // else if(simplemaps_canadamap_mapdata.state_specific.ON.name == name[i])
+                    //     simplemaps_canadamap_mapdata.state_specific.YT.description = marks[i]+" Cases"+((new_cases[i]!=0)?" (+"+new_cases[i]+" today)":"")+"<br>"+deaths[i]+" deaths";
                 }
 
-                simplemaps_canadamap.refresh();
+                // simplemaps_canadamap.refresh();
 
                 var chartdata = {
                     labels: name,
@@ -475,7 +480,7 @@ print_r($lcase_per_population);exit;*/
                         yAxes: [{
                         ticks: {
                             min: 0,
-                            maxTicksLimit: 10 
+                            maxTicksLimit: 10
                         },
                         gridLines: {
                             display: true
@@ -498,15 +503,15 @@ print_r($lcase_per_population);exit;*/
                                     "Apr","May","Jun",
                                     "Jul","Aug","Sep",
                                     "Oct","Nov","Dec"];
-                
+
                 var day = dt.getDate();
                 var month_index = dt.getMonth();
                 var year = dt.getFullYear();
-                
+
                 return "" + month_names[month_index] + " " + day;
             };
-            
-            
+
+
 
             $.post("case_chart_area.php",
             function (data)
@@ -519,7 +524,7 @@ print_r($lcase_per_population);exit;*/
                     var ddate = data[i].date;
                     var cdate = toShortFormat(new Date(ddate));
                     name.push(cdate);
-                    
+
                     sum += parseInt(data[i].totalGCase);
                     marks.push(sum);
                 }
@@ -591,15 +596,15 @@ print_r($lcase_per_population);exit;*/
                                     "Apr","May","Jun",
                                     "Jul","Aug","Sep",
                                     "Oct","Nov","Dec"];
-                
+
                 var day = dt.getDate();
                 var month_index = dt.getMonth();
                 var year = dt.getFullYear();
-                
+
                 return "" + month_names[month_index] + " " + day;
             };
-            
-            
+
+
 
             $.post("case_chart_area_2.php",
             function (data)
@@ -612,7 +617,7 @@ print_r($lcase_per_population);exit;*/
                     var ddate = data[i].date;
                     var cdate = toShortFormat(new Date(ddate));
                     name.push(cdate);
-                    
+
                     num = parseInt(data[i].totalGCase);
                     marks.push(num);
                 }

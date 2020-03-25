@@ -7,7 +7,7 @@ $(document).ready(() => {
 		// url: "http://localhost/Covid19TrackerCA/src/edit/api/controller/cases.php",
 		type: "GET",
 	}).then(res => {
-		
+
 		makeMap(res);
 
 		// override last update times + death & case count
@@ -32,10 +32,7 @@ $(document).ready(() => {
 
 
 		// setup hash for map
-		var mapKeys = {};
-		Object.keys(simplemaps_canadamap_mapdata['state_specific']).forEach(key => {
-			mapKeys[simplemaps_canadamap_mapdata['state_specific'][key].name] = key;
-		})
+
 
 		// calculate deaths & cases per province
 		var casesByProvince = {};
@@ -76,12 +73,10 @@ $(document).ready(() => {
 			deaths_total += parseInt(casesByProvince[province]["deaths"]);
 
 			// update the maps info
-			if (province in mapKeys) {
-				simplemaps_canadamap_mapdata.state_specific[mapKeys[province]].description = casesByProvince[province]["cases"] + " Cases" + "<br>" + casesByProvince[province]["deaths"] + " deaths";
-			}
+
 		}
 
-		simplemaps_canadamap.refresh();
+
 
 		$('#totalDeath')[0].innerHTML = deaths_total + " ";
 		$('.death_total')[0].innerHTML = deaths_total;
