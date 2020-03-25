@@ -138,7 +138,24 @@ function addIndividualCases(data) {
         console.log(e.features[0].properties);
         var theseCases = JSON.parse(e.features[0].properties.cases);
         var matchedLocations = [];
-        console.log(allCountries[theseCases[0].travel_history]);
+        var matchedFeatures = [];
+        theseCases.forEach(thisCase => {
+          if(matchedLocations.indexOf(thisCase.travel_history)===-1) {
+            console.log(allCountries, thisCase.travel_history)
+            if(allCountries[thisCase.travel_history]) {
+              var thisFeature = JSON.parse(JSON.stringify(allCountries[thisCase.travel_history]));
+              thisFeature.properties.number_of_cases = 1;
+              matchedLocations.push(thisCase.travel_history);
+            }
+          } else {
+            matchedFeatures.forEach(thisFeature => {
+              if(thisFeature.properties.name === thisCase.travel_history) {
+                thisFeature.properties.number_of_cases += 1;
+              }
+            })
+          }
+        })
+        console.log(matchedFeatures);
       }
     })
 
@@ -213,6 +230,7 @@ function addProvinces(data) {
         <p style="font-size:14px;">Click on any shape for more information.</p>
         <hr />
         <div style="display:flex;"><div class="circle-swatch"></div> <p>Affected Cities</p></div>
+        <div style="display:flex;margin-top:5px;"><div class="circle-swatch"></div> <p>Origin of Infection</p></div>
       `;
     }
 
