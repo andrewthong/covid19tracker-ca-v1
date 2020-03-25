@@ -38,8 +38,8 @@ $(document).ready(() => {
 		var casesByProvince = {};
 		res["casesByProvince"].forEach(r => {
 			if (r.province in casesByProvince) {
-				casesByProvince[r.province]["cases"] += parseInt(r.cases);
-				casesByProvince[r.province]["deaths"] += parseInt(r.deaths);
+				//casesByProvince[r.province]["cases"] += parseInt(r.cases);
+				//casesByProvince[r.province]["deaths"] += parseInt(r.deaths);
 			} else {
 				casesByProvince[r.province] = r;
 				casesByProvince[r.province]["cases"] = parseInt(casesByProvince[r.province]["cases"]);
