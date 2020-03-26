@@ -39,9 +39,9 @@ class Cases
             $row = $result->fetch(PDO::FETCH_ASSOC);
 
             return array(
-        'cases' => $row['TotalCase'],
-        'death' => $row['TotalDeath']
-      );
+                'cases' => $row['TotalCase'],
+                'death' => $row['TotalDeath']
+              );
         }
 
         return "";
