@@ -1,9 +1,11 @@
 var map;
 var popup;
-var allCountries;
+var data;
+var allLocations;
 var isAdvancedMap = window.location.href.indexOf('advanced') > -1;
 
-function makeMap(data) {
+function makeMap(cases) {
+  data = cases;
   mapboxgl.accessToken = 'pk.eyJ1IjoibWFwc3RlcnRlY2giLCJhIjoiY2s4M2U4eGJmMWJlejNsb3EyOXV4Zm1zaiJ9.aLWnB4UTvCto0wF5_9fePg';
   map = new mapboxgl.Map({
     container: 'map', // container id
@@ -19,14 +21,20 @@ function makeMap(data) {
   })
 
   map.on('load', () => {
-    addProvinces(data);
-    console.log(data);
+    addProvinces();
     if(isAdvancedMap) {
-      addIndividualCases(data);
+      getLocations();
       addCountries();
-      addSearch();
     }
   })
+}
+
+function getLocations() {
+    fetch(url+'api/controller/locations.php').then(response => response.json()).then(resp => {
+      allLocations = resp.locations;
+      addIndividualCases();
+      addSearch();
+    });
 }
 
 function addCountries() {
@@ -51,118 +59,129 @@ function addSearch() {
   map.addControl(geocoder,'top-left');
 }
 
-function addIndividualCases(data) {
-
-  // Fetch static file to compare against for most results, if there is another then geocode it
+function addIndividualCases() {
   // var cityList = [];
-  fetch('./assets/data/locations.json').then(response => response.json()).then(resp => {
-    console.log(resp);
+  var high = 0;
 
-    var high = 0;
+  var cityGeoJSON = { type: "FeatureCollection", features: [] };
 
-    resp.features.forEach(feature => {
-      feature.id = Math.random()*100;
-      var theseCases = data.individualCases.filter(covidCase => covidCase.city===feature.properties.city&&covidCase.province===feature.properties.province);
-      feature.properties.total_cases = theseCases.length;
-      feature.properties.cases = theseCases;
+  allLocations.forEach(location => {
+    var theseCases = data.individualCases.filter(covidCase => covidCase.city+' '+covidCase.province === location.original_text);
+    if(theseCases.length>0) {
       if(high < theseCases.length) {
         high = theseCases.length;
       }
-    })
-
-    var radiusPaint = [
-      'interpolate',
-      ['linear'],
-      ["number", ['get', 'total_cases']],
-      1, 1,
-      high, 20
-    ];
-
-    map.addSource('covid-cases', {
-      type : 'geojson',
-      data : resp
-    })
-    map.addLayer({
-      id : 'covid-cases',
-      source : 'covid-cases',
-      type : 'circle',
-      paint : {
-        'circle-color' : [
-          'case',
-          ['boolean', ['feature-state', 'hover'], false],
-          '#fff',
-          '#eee'
-        ],
-        'circle-radius' : radiusPaint,
-        'circle-stroke-color' : '#000',
-        'circle-stroke-width' : 1
-      },
-      layout : {
-      }
-    })
-
-    var hoveredStateId = false;
-    map.on('mousemove', 'covid-cases', (e) => {
-      if (e.features.length > 0) {
-        if (hoveredStateId) {
-          map.setFeatureState(
-            { source: 'covid-cases', id: hoveredStateId },
-            { hover: false }
-          );
+      cityGeoJSON.features.push({
+        type : "Feature",
+        id : Math.random()*100,
+        properties : {
+          city : theseCases[0].city,
+          total_cases : theseCases.length,
+          cases : theseCases
+        },
+        geometry : {
+          type : "Point",
+          coordinates : JSON.parse(location.coordinates)
         }
-        hoveredStateId = e.features[0].id;
-        map.setFeatureState(
-          { source: 'covid-cases', id: hoveredStateId },
-          { hover: true }
-        );
-      }
+      })
+    }
+  })
 
-      var properties = e.features[0].properties;
-      popup.setLngLat([e.lngLat.lng, e.lngLat.lat]).setHTML(`
-        <center><strong>${properties.city}</strong><br />
-        Total Cases : ${properties.total_cases} <br />
-      `).addTo(map);
-    })
-    map.on('mouseleave', 'covid-cases', function() {
+  var radiusPaint = [
+    'interpolate',
+    ['linear'],
+    ["number", ['get', 'total_cases']],
+    1, 1,
+    high, 20
+  ];
+
+  console.log(cityGeoJSON)
+
+  map.addSource('covid-cases', {
+    type : 'geojson',
+    data : cityGeoJSON
+  })
+  map.addLayer({
+    id : 'covid-cases',
+    source : 'covid-cases',
+    type : 'circle',
+    paint : {
+      'circle-color' : [
+        'case',
+        ['boolean', ['feature-state', 'hover'], false],
+        '#fff',
+        '#eee'
+      ],
+      'circle-radius' : radiusPaint,
+      'circle-stroke-color' : '#000',
+      'circle-stroke-width' : 1
+    },
+    layout : {
+    }
+  })
+
+  var hoveredStateId = false;
+  map.on('mousemove', 'covid-cases', (e) => {
+    if (e.features.length > 0) {
       if (hoveredStateId) {
         map.setFeatureState(
           { source: 'covid-cases', id: hoveredStateId },
           { hover: false }
         );
       }
-      popup.remove();
-      hoveredStateId = null;
-    });
-    map.on('click', 'covid-cases', (e) => {
-      if (e.features.length > 0) {
-        console.log(e.features[0].properties);
-        var theseCases = JSON.parse(e.features[0].properties.cases);
-        var matchedLocations = [];
-        var matchedFeatures = [];
-        theseCases.forEach(thisCase => {
-          if(matchedLocations.indexOf(thisCase.travel_history)===-1) {
-            console.log(allCountries, thisCase.travel_history)
-            if(allCountries[thisCase.travel_history]) {
-              var thisFeature = JSON.parse(JSON.stringify(allCountries[thisCase.travel_history]));
-              thisFeature.properties.number_of_cases = 1;
-              matchedLocations.push(thisCase.travel_history);
-            }
-          } else {
-            matchedFeatures.forEach(thisFeature => {
-              if(thisFeature.properties.name === thisCase.travel_history) {
-                thisFeature.properties.number_of_cases += 1;
-              }
-            })
-          }
-        })
-        console.log(matchedFeatures);
-      }
-    })
+      hoveredStateId = e.features[0].id;
+      map.setFeatureState(
+        { source: 'covid-cases', id: hoveredStateId },
+        { hover: true }
+      );
+    }
 
+    var properties = e.features[0].properties;
+    popup.setLngLat([e.lngLat.lng, e.lngLat.lat]).setHTML(`
+      <center><strong>${properties.city}</strong><br />
+      Total Cases : ${properties.total_cases} <br />
+    `).addTo(map);
   })
+  map.on('mouseleave', 'covid-cases', function() {
+    if (hoveredStateId) {
+      map.setFeatureState(
+        { source: 'covid-cases', id: hoveredStateId },
+        { hover: false }
+      );
+    }
+    popup.remove();
+    hoveredStateId = null;
+  });
+  /*
+  map.on('click', 'covid-cases', (e) => {
+    if (e.features.length > 0) {
+      console.log(e.features[0].properties);
+      var theseCases = JSON.parse(e.features[0].properties.cases);
+      var matchedLocations = [];
+      var matchedFeatures = [];
+      theseCases.forEach(thisCase => {
+        if(matchedLocations.indexOf(thisCase.travel_history)===-1) {
+          console.log(allCountries, thisCase.travel_history)
+          if(allCountries[thisCase.travel_history]) {
+            var thisFeature = JSON.parse(JSON.stringify(allCountries[thisCase.travel_history]));
+            thisFeature.properties.number_of_cases = 1;
+            matchedLocations.push(thisCase.travel_history);
+          }
+        } else {
+          matchedFeatures.forEach(thisFeature => {
+            if(thisFeature.properties.name === thisCase.travel_history) {
+              thisFeature.properties.number_of_cases += 1;
+            }
+          })
+        }
+      })
+      console.log(matchedFeatures);
+    }
+  })
+  */
 }
 
-function addProvinces(data) {
+function addProvinces() {
 
   fetch('./assets/data/provinces.json').then(resp => resp.json()).then(response => {
 
@@ -375,31 +394,36 @@ console.log(locationsGeoJSON);
 /*
 
 
-// var cityObject = {};
-//
-// cityList.forEach((city, index) => {
-  // if(index < 3) {
-    // var count = 0;
-    // setTimeout(() => {
-    //   fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/'+JSON.stringify(city)+'.json?types=place,region,district&country=ca&access_token=pk.eyJ1IjoibWFyaGxlbiIsImEiOiJjODQ3ZWRkMDdlOGQ3MmVhZGZkYTBjYTMwNzkwNzNjMyJ9.01tMkp2ZYFM7MLRshJRIJQ').then(response => response.json()).then(resp => {
-    //     // console.log(resp);
-    //     if(resp.features.length>0) {
-    //       cityObject[city] = {
-    //         id : resp.features[0].id,
-    //         text : resp.features[0].text,
-    //         place_name : resp.features[0].place_name,
-    //         bbox : resp.features[0].bbox,
-    //         center : resp.features[0].center
-    //       }
-    //       count += 1;
-    //       console.log(cityObject);
-    //       if(count === cityList.length-1) {
-    //         console.log(cityObject);
-    //         console.log('DONE');
-    //       }
-    //     }
-    //   })
-    // }, 1000*index);
-  // }
-// })
+  // var cityObject = [];
+  // var citiesDone = [];
+  // fetch('./assets/data/toconvert.json').then(response => response.json()).then(cityList => {
+  //   var count = 0;
+  //   cityList.forEach((city, index) => {
+  //     if(citiesDone.indexOf(city.city + ' ' + city.province) === -1) {
+  //       setTimeout(() => {
+  //         fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/'+JSON.stringify(city.city + ' ' + city.province)+'.json?types=place,region,district&country=ca&access_token=pk.eyJ1IjoibWFyaGxlbiIsImEiOiJjODQ3ZWRkMDdlOGQ3MmVhZGZkYTBjYTMwNzkwNzNjMyJ9.01tMkp2ZYFM7MLRshJRIJQ').then(response => response.json()).then(resp => {
+  //           // console.log(resp);
+  //           if(resp.features.length>0) {
+  //             var newLocationObject = {
+  //               id : resp.features[0].id,
+  //               text : resp.features[0].text,
+  //               place_name : resp.features[0].place_name,
+  //               center : resp.features[0].center,
+  //               original_text : city.city + ' ' + city.province
+  //             }
+  //             // count += 1;
+  //             cityObject.push(newLocationObject);
+  //             console.log(cityObject);
+  //             // if(count === cityList.length-1) {
+  //             //   console.log(cityObject);
+  //             //   console.log('DONE');
+  //             // }
+  //           }
+  //         })
+  //       }, 1000*count);
+  //       count += 1;
+  //     }
+  //     citiesDone.push(city.city + ' ' + city.province);
+  //   })
+  // })
 */
