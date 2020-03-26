@@ -2,7 +2,8 @@
 // @param dt: str  a date
 // @return: str shortDateFormat
 function toShortFormat(dt) {
-    var month_names = ["Jan", "Feb", "Mar",
+    var month_names = [
+        "Jan", "Feb", "Mar",
         "Apr", "May", "Jun",
         "Jul", "Aug", "Sep",
         "Oct", "Nov", "Dec"
@@ -25,9 +26,16 @@ function lineGraph(data, id, flag) {
     var marks = [];
     var sum = 0;
     for (var i in data) {
+        var date = new Date(data[i].dte);
+        date.setDate(date.getDate() + 1);
+
+        name.push(new Intl.DateTimeFormat('en-us', {
+            month: 'short',
+            day: 'numeric'
+        }).format(date));
+
         var ddate = data[i].dte;
         var cdate = toShortFormat(new Date(ddate));
-        name.push(cdate);
 
         if (flag) {
             sum += parseInt(data[i].totalGCase);
