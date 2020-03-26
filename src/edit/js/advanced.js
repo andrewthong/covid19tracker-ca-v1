@@ -12,6 +12,11 @@ $(document).ready(() => {
 		type: "GET",
 	}).then(res => {
 		makeMap(res);
+
+        // store results globally for other functions
+        window.case_results = res;
+        // load case estimate
+        window.estimateCases();
 	});
 })
 
