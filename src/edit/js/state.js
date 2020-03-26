@@ -30,7 +30,6 @@ $(document).ready(() => {
         // total infected from canada
         $('#infectedPerCanada')[0].innerHTML = Math.round((parseInt(res["totalCases"]["cases"]) / parseInt(res["casePerPopulation"]["Canada"]) * 100)) / 100;
 
-
         // calculate deaths & cases per province
         var casesByProvince = {};
         res["totalCaseProvince"].forEach(r => {
@@ -39,10 +38,9 @@ $(document).ready(() => {
             casesByProvince[r.province]["deaths"] = parseInt(casesByProvince[r.province]["deaths"]);
         })
 
-        console.log(casesByProvince);
         // update total case by providence per 100,00
         for (var province in casesByProvince) {
-            var calc = Math.round((parseInt(casesByProvince[province]["cases"]) / parseInt(res["casePerPopulation"][province]) * 100)) / 100;
+            var calc = Math.round((parseFloat(casesByProvince[province]["cases"]) / parseFloat(res["casePerPopulation"][province]) * 100)) / 100;
             if (isNaN(calc))
                 calc = 0;
 
