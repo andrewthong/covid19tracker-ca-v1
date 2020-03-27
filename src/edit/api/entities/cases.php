@@ -70,7 +70,7 @@ class Cases
         if ($result->rowCount() > 0) {
             $row = $result->fetchAll(PDO::FETCH_ASSOC);
             foreach ($row as $r) {
-                $data['province'] = array('cases' => r['cases'], 'deaths'=>r['deaths']);
+                $data[r['province']] = array('cases' => r['cases'], 'deaths'=>r['deaths']);
             }
 
             return $data;

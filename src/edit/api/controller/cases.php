@@ -40,5 +40,6 @@ $return_data['totalCaseProvince'] = $cases->totalCaseProvince();
 
 
 
+
 // print_r($return_data);
 echo json_encode($return_data);
