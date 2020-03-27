@@ -46,7 +46,7 @@ $(document).ready(() => {
             }
         })
 
-        console.log(provinceMap)
+        console.log(provinceMap.length)
 
         // update total case by providence per 100,00
 
@@ -63,10 +63,10 @@ $(document).ready(() => {
             var casesToday = "";
 
             if ('cases' in provinceMap[province] && provinceMap[province]['cases'] > 0)
-                casesToday = "(+" + provinceMap[province]['cases'] + " today)";
+                casesToday = " (+" + provinceMap[province]['cases'] + " today)";
 
-            if ('deathss' in provinceMap[province] && provinceMap[province]['deaths'] > 0)
-                deathsToday = "(+" + provinceMap[province]['deaths'] + " today)";
+            if ('deaths' in provinceMap[province] && provinceMap[province]['deaths'] > 0)
+                deathsToday = " (+" + provinceMap[province]['deaths'] + " today)";
             // append data to row
             $('#totalCasesProvinceTable').append(
                 "<tr>" +
