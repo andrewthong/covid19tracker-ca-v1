@@ -58,8 +58,6 @@ $(document).ready(() => {
                 "<td><a href='" + casesByProvince[province]["source"] + "'>Source</a></td>" +
                 "</tr>"
             )
-
-            console.log(province, casesByProvince[province]["source"])
         }
 
         $('.death_total')[0].innerHTML = res["totalCases"]["death"] + " ";
