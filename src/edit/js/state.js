@@ -38,7 +38,16 @@ $(document).ready(() => {
             casesByProvince[r.province]["deaths"] = parseInt(casesByProvince[r.province]["deaths"]);
         })
 
+        var provinceMap = {};
+        res["dailyCaseDeath"].forEach(r => {
+            provinceMap[r['province']] = {
+                'cases': parseInt(r['cases']),
+                'deaths': parseInt(r['deaths'])
+            }
+        })
+
         // update total case by providence per 100,00
+
         for (var province in casesByProvince) {
             var calc = Math.round((parseFloat(casesByProvince[province]["cases"]) / parseFloat(res["casePerPopulation"][province]) * 100)) / 100;
             if (isNaN(calc))
@@ -48,13 +57,21 @@ $(document).ready(() => {
             if (province == "Northwest Territories")
                 calc = 2.44;
 
+            var deathsToday = "";
+            var casesToday = "";
+
+            if (provinceMap[province]['cases'] > 0)
+                casesToday = "(+" + provinceMap[province]['cases'] + " today)";
+
+            if (provinceMap[province]['deaths'] > 0)
+                deathsToday = "(+" + provinceMap[province]['deaths'] + " today)";
             // append data to row
             $('#totalCasesProvinceTable').append(
                 "<tr>" +
                 "<td>" + province + "</td>" +
-                "<td><b><i>" + casesByProvince[province]["cases"] + "</i></b></td>" +
+                "<td><b><i>" + casesByProvince[province]["cases"] + casesToday + "</i></b></td>" +
                 "<td>" + calc + "</td>" +
-                "<td>" + casesByProvince[province]["deaths"] + "</td>" +
+                "<td>" + casesByProvince[province]["deaths"] + deathsToday + "</td>" +
                 "<td><a href='" + casesByProvince[province]["source"] + "'>Source</a></td>" +
                 "</tr>"
             )
