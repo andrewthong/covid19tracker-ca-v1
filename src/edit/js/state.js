@@ -40,9 +40,16 @@ $(document).ready(() => {
 
         var provinceMap = {};
         res["dailyCaseDeath"].forEach(r => {
-            provinceMap[r['province']] = {
-                'cases': parseInt(r['cases']),
-                'deaths': parseInt(r['deaths'])
+            if (r.province = "Prince Edward Island")
+                provinceMap["Prince Edward Island"] = {
+                    'cases': parseInt(r['cases']),
+                    'deaths': parseInt(r['deaths'])
+                }
+            else {
+                provinceMap[r['province']] = {
+                    'cases': parseInt(r['cases']),
+                    'deaths': parseInt(r['deaths'])
+                }
             }
         })
 
