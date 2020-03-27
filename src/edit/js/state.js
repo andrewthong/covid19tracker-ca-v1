@@ -62,10 +62,10 @@ $(document).ready(() => {
             var deathsToday = "";
             var casesToday = "";
 
-            if ('cases' in provinceMap && [province]['cases'] > 0)
+            if ('cases' in provinceMap[province] && provinceMap[province]['cases'] > 0)
                 casesToday = "(+" + provinceMap[province]['cases'] + " today)";
 
-            if ('deathss' in provinceMap && provinceMap[province]['deaths'] > 0)
+            if ('deathss' in provinceMap[province] && provinceMap[province]['deaths'] > 0)
                 deathsToday = "(+" + provinceMap[province]['deaths'] + " today)";
             // append data to row
             $('#totalCasesProvinceTable').append(
