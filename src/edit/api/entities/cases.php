@@ -39,9 +39,9 @@ class Cases
             $row = $result->fetch(PDO::FETCH_ASSOC);
 
             return array(
-        'cases' => $row['TotalCase'],
-        'death' => $row['TotalDeath']
-      );
+                'cases' => $row['TotalCase'],
+                'death' => $row['TotalDeath']
+              );
         }
 
         return "";
@@ -93,7 +93,7 @@ class Cases
     // totalCaseProvince gets sum of cases per province
     public function totalCaseProvince()
     {
-        $query = "SELECT C.province, COUNT(C.province) AS cases,(Select count(province) from new_death e where e.province = C.province) as deaths FROM new_case C GROUP BY C.province ORDER BY cases DESC";
+        $query = "SELECT C.province, COUNT(C.province) AS cases,(Select count(province) from new_death e where e.province = C.province) as deaths, C.source FROM new_case C GROUP BY C.province ORDER BY cases DESC";
         $result = $this->getQry($query);
 
         if ($result->rowCount() > 0) {
