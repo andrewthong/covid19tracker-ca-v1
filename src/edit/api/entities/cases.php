@@ -63,7 +63,7 @@ class Cases
     }
 
     public function dailyCaseDeath(){
-        $query = "SELECT count(id) as cases from new_case where DATE_FORMAT(date, '%Y-%m-%d')=CURDATE() UNION SELECT count(id) as deaths from new_death where DATE_FORMAT(date, '%Y-%m-%d')=CURDATE()";
+        $query = "SELECT C.province, COUNT(C.province) AS cases,(Select count(province) from new_death e where e.province = C.province and DATE_FORMAT(e.date, '%Y-%m-%d')=DATE_FORMAT(C.date, '%Y-%m-%d')) as deaths FROM new_case C where DATE_FORMAT(C.date, '%Y-%m-%d')=CURDATE() GROUP BY C.province ORDER BY cases DESC";
         $result = $this->getQry($query);
 
         if ($result->rowCount() > 0) {
