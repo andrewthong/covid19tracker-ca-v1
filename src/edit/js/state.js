@@ -70,13 +70,13 @@ $(document).ready(() => {
             var deathsToday = "";
             var casesToday = "";
 
-            console.log(provinceMap[province], province)
+            if (province in provinceMap) {
+                if (provinceMap[province].cases > 0)
+                    casesToday = " (+" + provinceMap[province].cases + " today)";
 
-            if (provinceMap[province].cases > 0)
-                casesToday = " (+" + provinceMap[province].cases + " today)";
-
-            if (provinceMap[province].deaths > 0)
-                deathsToday = " (+" + provinceMap[province].deaths + " today)";
+                if (provinceMap[province].deaths > 0)
+                    deathsToday = " (+" + provinceMap[province].deaths + " today)";
+            }
             // append data to row
             $('#totalCasesProvinceTable').append(
                 "<tr>" +
