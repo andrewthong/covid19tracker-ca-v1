@@ -66,9 +66,15 @@ class Cases
         $query = "SELECT C.province, COUNT(C.province) AS cases,(Select count(province) from new_death e where e.province = C.province and DATE_FORMAT(e.date, '%Y-%m-%d')=DATE_FORMAT(C.date, '%Y-%m-%d')) as deaths FROM new_case C where DATE_FORMAT(C.date, '%Y-%m-%d')=CURDATE() GROUP BY C.province ORDER BY cases DESC";
         $result = $this->getQry($query);
 
+        $data = array();
         if ($result->rowCount() > 0) {
             $row = $result->fetchAll(PDO::FETCH_ASSOC);
-            return $row;
+            foreach ($row as $r) {
+                $r['province'] = array('cases' => r['cases'], 'deaths'=>r['deaths']);
+                array_push($data, $r);
+            }
+
+            return $data;
         }
 
         return "";
