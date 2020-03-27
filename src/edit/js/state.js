@@ -40,21 +40,11 @@ $(document).ready(() => {
 
         var provinceMap = {};
         res["dailyCaseDeath"].forEach(r => {
-            if (r.province == "Prince Edward Island")
-                provinceMap["Prince Edward Island"] = {
-                    'cases': parseInt(r['cases']),
-                    'deaths': parseInt(r['deaths'])
-                }
-            else {
-                provinceMap[r['province']] = {
-                    'cases': parseInt(r['cases']),
-                    'deaths': parseInt(r['deaths'])
-                }
+            provinceMap[r['province']] = {
+                'cases': parseInt(r['cases']),
+                'deaths': parseInt(r['deaths'])
             }
         })
-
-        console.log(provinceMap)
-        console.log(casesByProvince)
 
         // update total case by providence per 100,00
 
@@ -77,13 +67,14 @@ $(document).ready(() => {
                 if (provinceMap[province].deaths > 0)
                     deathsToday = " (+" + provinceMap[province].deaths + " today)";
             }
+
             // append data to row
             $('#totalCasesProvinceTable').append(
                 "<tr>" +
                 "<td>" + province + "</td>" +
                 "<td><b><i>" + casesByProvince[province]["cases"] + casesToday + "</i></b></td>" +
                 "<td>" + calc + "</td>" +
-                "<td>" + casesByProvince[province]["deaths"] + deathsToday + "</td>" +
+                "<td><b><i>" + casesByProvince[province]["deaths"] + deathsToday + "</i></b></td>" +
                 "<td><a href='" + casesByProvince[province]["source"] + "'>Source</a></td>" +
                 "</tr>"
             )
