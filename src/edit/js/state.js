@@ -54,6 +54,7 @@ $(document).ready(() => {
         })
 
         console.log(provinceMap)
+        console.log(casesByProvince)
 
         // update total case by providence per 100,00
 
