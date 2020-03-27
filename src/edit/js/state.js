@@ -13,7 +13,6 @@ $(document).ready(() => {
         // override last update times + death & case count
         $('#updateTime')[0].innerHTML = res["lastUpdate"];
         $('#totalCases')[0].innerHTML = res["totalCases"]["cases"] + " ";
-        $('#totalCasesCanada')[0].innerHTML = res["totalCases"]["cases"] + " ";
         $('#totalDeath')[0].innerHTML = res["totalCases"]["death"] + " ";
 
         // get total death sum for canada
@@ -39,11 +38,16 @@ $(document).ready(() => {
         })
 
         var provinceMap = {};
+        var casesTodayTotal = 0;
+        var deathsTodayTotal = 0;
         res["dailyCaseDeath"].forEach(r => {
             provinceMap[r['province']] = {
                 'cases': parseInt(r['cases']),
                 'deaths': parseInt(r['deaths'])
             }
+            casesTodayTotal += parseInt(r['cases']);
+            deathsTodayTotal += parseInt(r['deaths']);
+
         })
 
         // update total case by providence per 100,00
@@ -80,7 +84,9 @@ $(document).ready(() => {
             )
         }
 
-        $('.death_total')[0].innerHTML = res["totalCases"]["death"] + " ";
+        $('#totalCasesCanada')[0].innerHTML = res["totalCases"]["cases"] + "(" + casesTodayTotal + " today)";
+
+        $('.death_total')[0].innerHTML = res["totalCases"]["death"] + "(" + deathsTodayTotal + " today)";
 
         // draw 3 main graphs
         lineGraph(res["cumulativeCases"], "#cumulativeCaseChart", true);
