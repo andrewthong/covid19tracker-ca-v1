@@ -84,9 +84,9 @@ $(document).ready(() => {
             )
         }
 
-        $('#totalCasesCanada')[0].innerHTML = res["totalCases"]["cases"] + "(" + casesTodayTotal + " today)";
+        $('#totalCasesCanada')[0].innerHTML = res["totalCases"]["cases"] + " (+" + casesTodayTotal + " today)";
 
-        $('.death_total')[0].innerHTML = res["totalCases"]["death"] + "(" + deathsTodayTotal + " today)";
+        $('.death_total')[0].innerHTML = res["totalCases"]["death"] + " (+" + deathsTodayTotal + " today)";
 
         // draw 3 main graphs
         lineGraph(res["cumulativeCases"], "#cumulativeCaseChart", true);
