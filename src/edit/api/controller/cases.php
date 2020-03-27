@@ -32,6 +32,7 @@ $return_data['lastUpdate'] = $cases->lastUpdated();
 $return_data['totalCases'] = $cases->totalCases();
 $return_data['cumulativeCases'] = $cases->cumulativeCases();
 $return_data['dailyCases'] = $cases->dailyCases();
+$return_data['dailyCaseDeath'] = $cases->dailyCaseDeath();
 $return_data['casesByProvince'] = $cases->casesByProvince();
 $return_data['deathsByProvince'] = $cases->deathsByProvince();
 $return_data['individualCases'] = $cases->individualCases();

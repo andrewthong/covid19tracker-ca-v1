@@ -62,6 +62,19 @@ class Cases
         return "";
     }
 
+    public function dailyCaseDeath(){
+        $query = "SELECT count(id) as cases from new_case where DATE_FORMAT(date, '%Y-%m-%d')=CURDATE() UNION SELECT count(id) as deaths from new_death where DATE_FORMAT(date, '%Y-%m-%d')=CURDATE()";
+        $result = $this->getQry($query);
+
+        if ($result->rowCount() > 0) {
+            $row = $result->fetchAll(PDO::FETCH_ASSOC);
+            return $row;
+        }
+
+        return "";
+
+    }
+
     // dailyCases: gets daily cases
     public function dailyCases()
     {
