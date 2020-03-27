@@ -70,6 +70,8 @@ $(document).ready(() => {
             var deathsToday = "";
             var casesToday = "";
 
+            console.log(provinceMap(province), province)
+
             if (provinceMap[province].cases > 0)
                 casesToday = " (+" + provinceMap[province].cases + " today)";
 
