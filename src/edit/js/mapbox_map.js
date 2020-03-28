@@ -2,6 +2,7 @@ var map;
 var popup;
 var data;
 var allLocations;
+var cityGeoJSON;
 var isAdvancedMap = window.location.href.indexOf('advanced') > -1;
 
 function makeMap(cases) {
@@ -32,6 +33,7 @@ function makeMap(cases) {
 function getLocations() {
     fetch(url+'api/controller/locations.php').then(response => response.json()).then(resp => {
       allLocations = resp.locations;
+      addTravelHistoryLocations();
       addIndividualCases();
       addSearch();
     });
@@ -49,21 +51,67 @@ function addCountries() {
 function addSearch() {
     var geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
-        mapboxgl: mapboxgl
-    });
-    var geocoder = new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl,
         placeholder: 'Search cases near you'
     })
     map.addControl(geocoder, 'top-left');
+
+    geocoder.on('result', (e) => {
+      var resultsIn40KM = [];
+      cityGeoJSON.features.forEach(city => {
+        if(turf.distance(city.geometry.coordinates, e.result.center) < 40) {
+          resultsIn40KM.push(city);
+        }
+      })
+      var html = '<ul>';
+      resultsIn40KM.forEach(city => {
+        html += `<li><div class="city-result"><strong>${city.properties.city}</strong>: ${city.properties.total_cases} total cases</div></li>`
+      })
+      html += '</ul>';
+      document.getElementById('map-results').innerHTML = html;
+      document.getElementById('map-results').style.display = 'block';
+    })
+
+    geocoder.on('clear', (e) => {
+      document.getElementById('map-results').innerHTML = '';
+      document.getElementById('map-results').style.display = 'none';
+    });
+    // #map-results
+}
+// User indexOf for travel_history
+// Good to show total actually shown, because many may not have matches
+// dding a little disclaimer that they aren't all shown
+
+function addTravelHistoryLocations() {
+
+    var travelHistoryGeoJSON = { type: "FeatureCollection", features: [] };
+    allLocations.forEach(location => {
+      var theseCases = data.individualCases.filter(covidCase => covidCase.travel_history.indexOf(location.original_text) > -1 || covidCase.travel_history.indexOf(location.full_name) > -1);
+      if(theseCases.length>0) {
+        travelHistoryGeoJSON.features.push({
+          type : "Feature",
+          id : Math.random()*100,
+          properties : {
+            location_alt : location.full_name,
+            location : location.original_text,
+            total_cases : theseCases.length,
+            cases : theseCases
+          },
+          geometry : {
+            type : "Point",
+            coordinates : JSON.parse(location.coordinates)
+          }
+        })
+      }
+    })
+    console.log(travelHistoryGeoJSON)
 }
 
 function addIndividualCases() {
   // var cityList = [];
   var high = 0;
 
-  var cityGeoJSON = { type: "FeatureCollection", features: [] };
+  cityGeoJSON = { type: "FeatureCollection", features: [] };
 
   allLocations.forEach(location => {
     var theseCases = data.individualCases.filter(covidCase => covidCase.city+' '+covidCase.province === location.original_text);
@@ -193,7 +241,7 @@ function addProvinces() {
 
         response.features.forEach((feature) => {
             feature.id = feature.properties.cartodb_id;
-            var provinceData = data.totalCaseProvince.filter(item => item.province === feature.properties.name);
+            var provinceData = data.casesByProvince.filter(item => item.province === feature.properties.name);
             feature.properties.province_cases_total = provinceData.length > 0 ? provinceData[0].cases : '';
             feature.properties.province_cases_per_population = provinceData.length > 0 ? provinceData[0].cases / (feature.properties.population / 100000) : 0;
             if (data.deathsByProvince[feature.properties.name]) {
