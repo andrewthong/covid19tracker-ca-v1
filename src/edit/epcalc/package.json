@@ -1,0 +1,19 @@
+{
+  "name": "epcalc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "epcalc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "query-string": "^6.11.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "laravel-mix": "^5.0.4",
+    "vue-template-compiler": "^2.6.11"
+  }
+}
