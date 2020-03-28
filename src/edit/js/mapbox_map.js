@@ -38,25 +38,25 @@ function getLocations() {
 }
 
 function addCountries() {
-  fetch('./assets/data/countries.json').then(response => response.json()).then(resp => {
-    allCountries = {};
-    resp.features.forEach(feature => {
-      allCountries[feature.properties.name] = feature;
-    })
-  });
+    fetch('./assets/data/countries.json').then(response => response.json()).then(resp => {
+        allCountries = {};
+        resp.features.forEach(feature => {
+            allCountries[feature.properties.name] = feature;
+        })
+    });
 }
 
 function addSearch() {
-  var geocoder = new MapboxGeocoder({
-    accessToken: mapboxgl.accessToken,
-    mapboxgl: mapboxgl
-  });
-  var geocoder = new MapboxGeocoder({
-    accessToken: mapboxgl.accessToken,
-    mapboxgl: mapboxgl,
-    placeholder : 'Search cases near you'
-  })
-  map.addControl(geocoder,'top-left');
+    var geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl
+    });
+    var geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl,
+        placeholder: 'Search cases near you'
+    })
+    map.addControl(geocoder, 'top-left');
 }
 
 function addIndividualCases() {
@@ -183,56 +183,59 @@ function addIndividualCases() {
 
 function addProvinces() {
 
-  fetch('./assets/data/provinces.json').then(resp => resp.json()).then(response => {
+    fetch('./assets/data/provinces.json').then(resp => resp.json()).then(response => {
 
-    var centroidGeoJSON = { type : "FeatureCollection", features : [] };
-    var fillRange = [];
+        var centroidGeoJSON = {
+            type: "FeatureCollection",
+            features: []
+        };
+        var fillRange = [];
 
-    response.features.forEach((feature) => {
-      feature.id = feature.properties.cartodb_id;
-      var provinceData = data.totalCaseProvince.filter(item => item.province===feature.properties.name);
-      feature.properties.province_cases_total = provinceData.length>0 ? provinceData[0].cases : '';
-      feature.properties.province_cases_per_population = provinceData.length>0 ? provinceData[0].cases/(feature.properties.population/100000) : 0;
-      if(data.deathsByProvince[feature.properties.name]) {
-        feature.properties.province_deaths_total = data.deathsByProvince[feature.properties.name];
-      } else {
-        feature.properties.province_deaths_total = 0;
-      }
-      // Making centroids
-      var centroidFeature = JSON.parse(JSON.stringify(feature));
-      centroidFeature.geometry.coordinates = feature.properties.label_coords;
-      centroidFeature.geometry.type = "Point";
-      centroidGeoJSON.features.push(centroidFeature);
+        response.features.forEach((feature) => {
+            feature.id = feature.properties.cartodb_id;
+            var provinceData = data.totalCaseProvince.filter(item => item.province === feature.properties.name);
+            feature.properties.province_cases_total = provinceData.length > 0 ? provinceData[0].cases : '';
+            feature.properties.province_cases_per_population = provinceData.length > 0 ? provinceData[0].cases / (feature.properties.population / 100000) : 0;
+            if (data.deathsByProvince[feature.properties.name]) {
+                feature.properties.province_deaths_total = data.deathsByProvince[feature.properties.name];
+            } else {
+                feature.properties.province_deaths_total = 0;
+            }
+            // Making centroids
+            var centroidFeature = JSON.parse(JSON.stringify(feature));
+            centroidFeature.geometry.coordinates = feature.properties.label_coords;
+            centroidFeature.geometry.type = "Point";
+            centroidGeoJSON.features.push(centroidFeature);
 
-      if(fillRange.length === 0 || fillRange[0]>feature.properties.province_cases_per_population) {
-        fillRange[0] = parseFloat(feature.properties.province_cases_per_population);
-      }
-      if(fillRange.length === 1 || fillRange[1]<feature.properties.province_cases_per_population) {
-        fillRange[1] = parseFloat(feature.properties.province_cases_per_population);
-      }
+            if (fillRange.length === 0 || fillRange[0] > feature.properties.province_cases_per_population) {
+                fillRange[0] = parseFloat(feature.properties.province_cases_per_population);
+            }
+            if (fillRange.length === 1 || fillRange[1] < feature.properties.province_cases_per_population) {
+                fillRange[1] = parseFloat(feature.properties.province_cases_per_population);
+            }
 
-    })
+        })
 
-    map.addSource('provinces', {
-      type : 'geojson',
-      data : response
-    });
-    map.addSource('provinces-centroids', {
-      type : 'geojson',
-      data : centroidGeoJSON
-    });
+        map.addSource('provinces', {
+            type: 'geojson',
+            data: response
+        });
+        map.addSource('provinces-centroids', {
+            type: 'geojson',
+            data: centroidGeoJSON
+        });
 
-    var fillColor = [
-      'interpolate',
-      ['linear'],
-      ["number", ['get', 'province_cases_per_population']],
-      fillRange[0], '#007000',
-      fillRange[1]*0.3, '#238823',
-      fillRange[1]*0.6, '#FFbF00',
-      fillRange[1]*0.9, '#D2222D'
-    ];
+        var fillColor = [
+            'interpolate',
+            ['linear'],
+            ["number", ['get', 'province_cases_per_population']],
+            fillRange[0], '#007000',
+            fillRange[1] * 0.3, '#238823',
+            fillRange[1] * 0.6, '#FFbF00',
+            fillRange[1] * 0.9, '#D2222D'
+        ];
 
-    var mapHTML = `
+        var mapHTML = `
       <strong>Cases Per 100,000</strong>
       <div class="gradient-swatch"></div>
       <ul>
@@ -243,121 +246,127 @@ function addProvinces() {
       <p>Total cases to date in red.</p>
       <p>See more on <a href="advanced.html">Advanced Map</a>.</p>
     `;
-    if(isAdvancedMap) {
-      mapHTML = `
+        if (isAdvancedMap) {
+            mapHTML = `
         <strong>Map In Progress</strong>
         <p style="font-size:14px;">Click on any shape for more information.</p>
         <hr />
         <div style="display:flex;"><div class="circle-swatch"></div> <p>Affected Cities</p></div>
       `;
-    }
-
-    document.getElementById('map-overlay').innerHTML = mapHTML;
-
-    map.addLayer({
-      id : 'provinces-fill',
-      type : 'fill',
-      source : 'provinces',
-      paint : {
-        'fill-color' : fillColor,
-        'fill-opacity' : [
-          'case',
-          ['boolean', ['feature-state', 'hover'], false],
-          0.5,
-          0.3
-        ]
-      }
-    }, map.getSource('covid-cases') ? 'covid-cases': null)
-
-    map.addLayer({
-      id : 'provinces-cases',
-      type : 'symbol',
-      source : 'provinces-centroids',
-      layout : {
-        'text-field' : ["get", "province_cases_total"],
-        'text-size' : 12,
-        'text-offset' : [0, 0.6],
-        // 'text-allow-overlap' : true,
-        // 'text-ignore-placement' : true
-      },
-      paint : {
-        'text-color' : '#b22525',
-        'text-halo-color' : '#FFF',
-        'text-halo-width' : 2
-      }
-    })
-    map.addLayer({
-      id : 'provinces-label',
-      type : 'symbol',
-      source : 'provinces-centroids',
-      layout : {
-        'text-field' : ["get", "abbreviation"],
-        'text-size' : 15,
-        'text-offset' : [0, -0.6],
-        // 'text-allow-overlap' : true,
-        'text-ignore-placement' : true
-      },
-      paint : {
-        'text-color' : '#333',
-        'text-halo-color' : '#FFF',
-        'text-halo-width' : 2
-      }
-    })
-
-    map.addLayer({
-      id : 'provinces-line',
-      type : 'line',
-      source : 'provinces',
-      paint : {
-        'line-color' : '#000',
-        'line-opacity' : [
-          'case',
-          ['boolean', ['feature-state', 'hover'], false],
-          0.5,
-          0.3
-        ]
-      }
-    })
-
-    var hoveredStateId = false;
-    map.on('mousemove', 'provinces-fill', (e) => {
-      if (e.features.length > 0) {
-        if (hoveredStateId) {
-          map.setFeatureState(
-            { source: 'provinces', id: hoveredStateId },
-            { hover: false }
-          );
         }
-        hoveredStateId = e.features[0].id;
-        map.setFeatureState(
-          { source: 'provinces', id: hoveredStateId },
-          { hover: true }
-        );
-      }
+
+        document.getElementById('map-overlay').innerHTML = mapHTML;
+
+        map.addLayer({
+            id: 'provinces-fill',
+            type: 'fill',
+            source: 'provinces',
+            paint: {
+                'fill-color': fillColor,
+                'fill-opacity': [
+                    'case',
+                    ['boolean', ['feature-state', 'hover'], false],
+                    0.5,
+                    0.3
+                ]
+            }
+        }, map.getSource('covid-cases') ? 'covid-cases' : null)
+
+        map.addLayer({
+            id: 'provinces-cases',
+            type: 'symbol',
+            source: 'provinces-centroids',
+            layout: {
+                'text-field': ["get", "province_cases_total"],
+                'text-size': 12,
+                'text-offset': [0, 0.6],
+                // 'text-allow-overlap' : true,
+                // 'text-ignore-placement' : true
+            },
+            paint: {
+                'text-color': '#b22525',
+                'text-halo-color': '#FFF',
+                'text-halo-width': 2
+            }
+        })
+        map.addLayer({
+            id: 'provinces-label',
+            type: 'symbol',
+            source: 'provinces-centroids',
+            layout: {
+                'text-field': ["get", "abbreviation"],
+                'text-size': 15,
+                'text-offset': [0, -0.6],
+                // 'text-allow-overlap' : true,
+                'text-ignore-placement': true
+            },
+            paint: {
+                'text-color': '#333',
+                'text-halo-color': '#FFF',
+                'text-halo-width': 2
+            }
+        })
+
+        map.addLayer({
+            id: 'provinces-line',
+            type: 'line',
+            source: 'provinces',
+            paint: {
+                'line-color': '#000',
+                'line-opacity': [
+                    'case',
+                    ['boolean', ['feature-state', 'hover'], false],
+                    0.5,
+                    0.3
+                ]
+            }
+        })
+
+        var hoveredStateId = false;
+        map.on('mousemove', 'provinces-fill', (e) => {
+            if (e.features.length > 0) {
+                if (hoveredStateId) {
+                    map.setFeatureState({
+                        source: 'provinces',
+                        id: hoveredStateId
+                    }, {
+                        hover: false
+                    });
+                }
+                hoveredStateId = e.features[0].id;
+                map.setFeatureState({
+                    source: 'provinces',
+                    id: hoveredStateId
+                }, {
+                    hover: true
+                });
+            }
 
 
-      if(!isAdvancedMap) {
-        var properties = e.features[0].properties;
-        popup.setLngLat([e.lngLat.lng, e.lngLat.lat]).setHTML(`
+            if (!isAdvancedMap) {
+                var properties = e.features[0].properties;
+                popup.setLngLat([e.lngLat.lng, e.lngLat.lat]).setHTML(`
           <center><strong>${properties.name}</strong><br />
           Total Cases : ${properties.province_cases_total} <br />
           Total Deaths : ${properties.province_deaths_total} </center>
         `).addTo(map);
-      }
+            }
+        })
+        map.on('mouseleave', 'provinces-fill', function() {
+            if (hoveredStateId) {
+                map.setFeatureState({
+                    source: 'provinces',
+                    id: hoveredStateId
+                }, {
+                    hover: false
+                });
+            }
+            if (!isAdvancedMap) {
+                popup.remove();
+            }
+            hoveredStateId = null;
+        });
     })
-    map.on('mouseleave', 'provinces-fill', function() {
-      if (hoveredStateId) {
-        map.setFeatureState(
-          { source: 'provinces', id: hoveredStateId },
-          { hover: false }
-        );
-      }
-      if(!isAdvancedMap) {
-        popup.remove();
-      }
-      hoveredStateId = null;
-    });
-  })
 }
 
 
