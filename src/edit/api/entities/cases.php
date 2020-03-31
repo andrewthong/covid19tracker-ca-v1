@@ -44,7 +44,7 @@ class Cases
               );
         }
 
-        return "";
+        return new stdClass();
     }
 
     // cumulativeCases: gets cumulativeCases
@@ -59,7 +59,7 @@ class Cases
             return $row;
         }
 
-        return "";
+        return array();
     }
 
     public function dailyCaseDeath(){
@@ -71,7 +71,7 @@ class Cases
             return $row;
         }
 
-        return "";
+        return array();
 
     }
 
@@ -86,7 +86,7 @@ class Cases
             return $row;
         }
 
-        return "";
+        return array();
     }
 
     // casesByProvince: gets cases by the province
@@ -100,7 +100,7 @@ class Cases
             return $row;
         }
 
-        return "";
+        return array();
     }
 
     // totalCaseProvince gets sum of cases per province
@@ -114,7 +114,7 @@ class Cases
             return $row;
         }
 
-        return "";
+        return array();
     }
 
     // deathsByProvince: gets sum of deaths per province
@@ -131,7 +131,7 @@ class Cases
             return $data;
         }
 
-        return "";
+        return new stdClass();
     }
 
     // individualCases: gets all cases
@@ -146,7 +146,7 @@ class Cases
             return $row;
         }
 
-        return "";
+        return array();
     }
 
     // getProvinceData: gets deaths + cases by province
@@ -184,7 +184,7 @@ class Cases
             return $row;
         }
 
-        return "";
+        return array();
     }
 
     // getProvinceCumulativeCases: gets cumulative for province
@@ -199,7 +199,7 @@ class Cases
             return $row;
         }
 
-        return "";
+        return array();
     }
 
     // getQry: executes the query
