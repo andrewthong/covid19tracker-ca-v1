@@ -159,9 +159,20 @@
     </script>
 </head>
 
+<?php
+$url = strtok($_SERVER["REQUEST_URI"], '?');
+$word = 'EN';
+if($current_language==='en') {
+  $word = 'FR';
+  $url = $url . '?lang=fr';
+}
+?>
+
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <a class="navbar-brand" href="index.html"><?php echo $translations['covid-19-tracker'][$current_language]; ?></a>
+        <a class="btn btn-secondary" style="position:absolute;right:0;margin-right:10px;"
+          href="<?php echo $url; ?>"><?php echo $word; ?></a>
     </nav>
     <div class="sb-sidenav-footer">
     </div>
