@@ -17,6 +17,10 @@ if(isset($_POST["submit"])){
 	
 	$sql = "INSERT INTO `new_case` (`province`, `city`, `age`, `travel_history`, `confirmed_presumptive`, `source`, `date`) VALUES ".implode(",", $values);
 
+
+
+	$conn->query("SET NAMES utf8");
+
 	if ($conn->query($sql) === TRUE) {
 		$success = 'New case created successfully.';
 	} else {
@@ -31,6 +35,7 @@ if(isset($_POST["submit"])){
 <html>
 <head>
 	<link href="css/my_css.css" rel="stylesheet" />
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8" />
 
 </head>
 <body>
@@ -57,17 +62,18 @@ if(isset($_POST["submit"])){
 		  		<label for="province">Province</label>
 		    	<input type="text" id="province" name="province" required>
 		  	</div>
+
 		  	<div class="col-md-12 txt-center">
 		  		<label for="city">City</label>
-		    	<input type="text" id="city" name="city" required>
+		    	<input type="text" id="city" name="city" value="Pending" required>
 		  	</div>
 		  	<div class="col-md-12 txt-center">
 		  		<label for="age">Age</label>
-		    	<input type="text" id="age" name="age" required>
+		    	<input type="text" id="age" name="age" value="Pending" required>
 		  	</div>
 		  	<div class="col-md-12 txt-center">
 		  		<label for="travel_history">Travel History</label>
-		    	<textarea id="travel_history" name="travel_history" required></textarea> 
+		    	<textarea id="travel_history" name="travel_history" value="Pending" required></textarea> 
 		  	</div>
 		  	<div class="col-md-12 txt-center">
 		  		<label for="confirmed_presumptive">Confirmed/Presumptive</label>
