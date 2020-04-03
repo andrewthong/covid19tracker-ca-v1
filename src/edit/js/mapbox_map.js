@@ -217,7 +217,7 @@ function addProvinces(data) {
             ["number", ['get', 'province_cases_per_population']],
             fillRange[0], '#007000',
             fillRange[1] * 0.3, '#238823',
-            fillRange[1] * 0.6, '#FFbF00',
+            fillRange[1] * 0.6, '#FFbF00', 
             fillRange[1] * 0.9, '#D2222D'
         ];
 
@@ -230,7 +230,6 @@ function addProvinces(data) {
         <li style="text-align: right;">${fillRange[1].toFixed(1)}</li>
       </ul>
       <p>Total cases to date in red.</p>
-      <p>See more on <a href="advanced.html">Advanced Map</a>.</p>
     `;
         if (isAdvancedMap) {
             mapHTML = `
