@@ -217,19 +217,19 @@ function addProvinces(data) {
             ["number", ['get', 'province_cases_per_population']],
             fillRange[0], '#007000',
             fillRange[1] * 0.3, '#238823',
-            fillRange[1] * 0.6, '#FFbF00', 
+            fillRange[1] * 0.6, '#FFbF00',
             fillRange[1] * 0.9, '#D2222D'
         ];
 
         var mapHTML = `
-      <strong>${translationObject['cases_per'][currentLanguage]}</strong>
+      <strong>Cases Per 100,000</strong>
       <div class="gradient-swatch"></div>
       <ul>
         <li style="text-align:left;">${fillRange[0].toFixed(1)}</li>
         <li style="text-align:center;">${(fillRange[1]*0.5).toFixed(1)}</li>
         <li style="text-align: right;">${fillRange[1].toFixed(1)}</li>
       </ul>
-      <p>${translationObject['total_cases_red'][currentLanguage]}.</p>
+      <p>Total cases to date in red.</p>
     `;
         if (isAdvancedMap) {
             mapHTML = `
@@ -332,8 +332,8 @@ function addProvinces(data) {
                 var properties = e.features[0].properties;
                 popup.setLngLat([e.lngLat.lng, e.lngLat.lat]).setHTML(`
           <center><strong>${properties.name}</strong><br />
-          ${translationObject['total_cases'][currentLanguage]} : ${properties.province_cases_total} <br />
-          ${translationObject['total_deaths'][currentLanguage]} : ${properties.province_deaths_total} </center>
+          Total Cases : ${properties.province_cases_total} <br />
+          Total Deaths : ${properties.province_deaths_total} </center>
         `).addTo(map);
             }
         })

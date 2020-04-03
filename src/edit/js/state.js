@@ -1,3 +1,33 @@
+// TRANSLATIONS
+var currentLanguage = 'en';
+const urlParams = new URLSearchParams(window.location.search);
+const myParam = urlParams.get('lang');
+if(myParam === 'fr') {
+  currentLanguage = 'fr';
+}
+var translationObject = {
+  'cases_per' : {
+    en : 'Cases Per 100,000',
+    fr : 'Cas par 100,000'
+  },
+  'total_cases_red' : {
+    en : 'Total cases to date in red.',
+    fr : 'Cas cumulatifs en rouge.'
+  },
+  'today' : {
+    en : 'today',
+    fr : "aujourd'hui"
+  },
+  'total_cases' : {
+    en : 'Total Cases',
+    fr : 'Cas cumulatifs'
+  },
+  'total_deaths' : {
+    en : 'Total Deaths',
+    fr : 'Décès cumulatifs'
+  }
+}
+
 // Controls the state of the application, sets up correct data information
 $(document).ready(() => {
 
@@ -66,10 +96,10 @@ $(document).ready(() => {
 
             if (province in provinceMap) {
                 if (provinceMap[province].cases > 0)
-                    casesToday = " (+" + provinceMap[province].cases + " today)";
+                    casesToday = " (+" + provinceMap[province].cases + " "+translationObject['today'][currentLanguage]+")";
 
                 if (provinceMap[province].deaths > 0)
-                    deathsToday = " (+" + provinceMap[province].deaths + " today)";
+                    deathsToday = " (+" + provinceMap[province].deaths + " "+translationObject['today'][currentLanguage]+")";
             }
 
             // append data to row
@@ -84,9 +114,9 @@ $(document).ready(() => {
             )
         }
 
-        $('#totalCasesCanada')[0].innerHTML = res["totalCases"]["cases"] + " (+" + casesTodayTotal + " today)";
+        $('#totalCasesCanada')[0].innerHTML = res["totalCases"]["cases"] + " (+" + casesTodayTotal + " "+translationObject['today'][currentLanguage]+")";
 
-        $('.death_total')[0].innerHTML = res["totalCases"]["death"] + " (+" + deathsTodayTotal + " today)";
+        $('.death_total')[0].innerHTML = res["totalCases"]["death"] + " (+" + deathsTodayTotal + " "+translationObject['today'][currentLanguage]+")";
 
         // draw 3 main graphs
         lineGraph(res["cumulativeCases"], "#cumulativeCaseChart", true);

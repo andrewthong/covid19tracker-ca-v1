@@ -1,120 +1,3 @@
-<?php
-
-  $translations = array(
-    'covid-19-tracker' => array(
-      'fr' => 'Algorithme de suivi de la COVID-19 Canada',
-      'en' => 'COVID-19 Tracker Canada'
-    ),
-    'updated' => array(
-      'fr' => 'Mis à jour',
-      'en' => 'Updated'
-    ),
-    'think-you-might-have' => array(
-      'fr' => '<b>Vous pensez avoir contracté la COVID-19?</b><br>  Composez le <i>811</i> ou le <i>1-866-797-0000</i> si vous résidez en Ontario',
-      'en' => '<b>Think you may have COVID-19?</b><br> Call <i>811</i> or <i>1-866-797-0000</i> in Ontario'
-    ),
-    'self-assess' => array(
-      'fr' => 'Démarrer l’auto-évaluation COVID-19',
-      'en' => 'Launch COVID-19 Self Assessment'
-    ),
-    'outside-canada' => array(
-      'fr' => 'Vous êtes présentement à l’extérieur du Canada? Voici ce que vous devez savoir',
-      'en' => "Currently Outside of Canada? Here's what you need to know"
-    ),
-    'gov-instructions' => array(
-      'fr' => 'Directives du Gouvernement du Canada',
-      'en' => 'Instructions from the Government of Canada'
-    ),
-    'be-prepared' => array(
-      'fr' => 'Soyez prêts',
-      'en' => 'Be Prepared'
-    ),
-    'learn-more' => array(
-      'fr' => 'En apprendre plus au sujet de la COVID-19',
-      'en' => 'Learn more about COVID-19'
-    ),
-    'canada-cumulative' => array(
-      'fr' => 'Cas cumulatifs au Canada',
-      'en' => 'Canada Cumulative Cases'
-    ),
-    'cases' => array(
-      'fr' => 'Cas',
-      'en' => 'Cases'
-    ),
-    'deaths' => array(
-      'fr' => 'Décès',
-      'en' => 'Deaths'
-    ),
-    'by-province' => array(
-      'fr' => 'Par Province',
-      'en' => 'By Province'
-    ),
-    'total-by-province' => array(
-      'fr' => 'Nombre de cas total par province',
-      'en' => 'Total Cases By Province'
-    ),
-    'source' => array(
-      'fr' => 'Source',
-      'en' => 'Source'
-    ),
-    'individual-cases' => array(
-      'fr' => 'Cas individuels',
-      'en' => 'Individual Cases'
-    ),
-    'travel-history' => array(
-      'fr' => 'Historique de voyage',
-      'en' => 'Travel History'
-    ),
-    'age' => array(
-      'fr' => 'Âge',
-      'en' => 'Age'
-    ),
-    'city' => array(
-      'fr' => 'Ville',
-      'en' => 'City'
-    ),
-    'date' => array(
-      'fr' => 'Date',
-      'en' => 'Date'
-    ),
-    'patient-no' => array(
-      'fr' => 'Numéro de patient',
-      'en' => 'Patient #'
-    ),
-    'confirmed-presumptive' => array(
-      'fr' => 'Confirmé/présumé',
-      'en' => 'Confirmed/Presumptive'
-    ),
-    'mar-17-text' => array(
-      'fr' => '*Le 17 mars, le nombre total de cas par région a été annoncé en Colombie Britannique bien qu’aucun détail régional n’ait été fourni le 16 mars; par conséquent, bien que le nombre total de cas rapporté pour chaque région de la Colombie Britannique est exact pour la période du 16 au 17 mars, il est impossible ce confirmer le nombre de cas par région par jour pour cette période. Ces chiffres relèvent donc purement de la spéculation.',
-      'en' => '*On March 17th, region totals were announced in BC after no region details were provided on March 16th; therefore, while the totals for each BC region reported are accurate over March 16th and 17th, regions per day cannot be confirmed and as such are purely speculative.'
-    ),
-    'mar-24-text' => array(
-      'fr' => '**Le 24 mars, le nombre total de cas par région du Québec a été mis à jour suite à une modification dans la manière de classifier les cas en attente de confirmation et les cas de non-résidents; puisqu’il est impossible de savoir de quelle région proviennent ces cas, le nombre total de cas par région du Québec pour le 24 mars relève donc purement de la spéculation.',
-      'en' => '**On March 24th, region totals were updated in Quebec that reassigned previous pending and non-resident cases; as it is impossible to know where each specific case was reassigned, regions from Quebec cases on March 24th cannot be verified and as such are purely speculative.'
-    ),
-    'doing-research' => array(
-      'fr' => 'Vous faites de la recherche ou avez besoin des données brutes?',
-      'en' => 'Doing research or need the raw data?'
-    ),
-    'request-data' => array(
-      'fr' => 'Demander les données',
-      'en' => 'Request Data'
-    ),
-    'copyright' => array(
-      'fr' => 'Droits d’auteur © COVID19Tracker.ca 2020 // COVID19Tracker.ca rapporte les cas présumés et les cas confirmés de la COVID-19 en temps quasi-réel // contact@covid19tracker.ca',
-      'en' => 'Copyright © COVID19Tracker.ca 2020 // COVID19Tracker.ca reports both presumptive and confirmed cases in near real-time // contact@covid19tracker.ca'
-    )
-  );
-
-
-  $current_language = 'en';
-  if(isset($_GET['lang']) && $_GET['lang']=='fr') {
-    $current_language = 'fr';
-  }
-
-?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -124,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title><?php echo $translations['covid-19-tracker'][$current_language]; ?></title>
+    <title>COVID-19 Canada Tracker</title>  
 
     <link href="css/styles.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
@@ -161,7 +44,7 @@
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.html"><?php echo $translations['covid-19-tracker'][$current_language]; ?></a>
+        <a class="navbar-brand" href="index.html">COVID-19 Tracker Canada</a>
     </nav>
     <div class="sb-sidenav-footer">
     </div>
@@ -176,9 +59,9 @@
 
                     <div class="col-xl-3 col-md-6">
                         <div class="card bg-danger text-white mb-4">
-                            <div class="card-body"><?php echo $translations['think-you-might-have'][$current_language]; ?></div>
+                            <div class="card-body"><b>Think you may have COVID-19?</b><br> Call <i>811</i> or <i>1-866-797-0000</i> in Ontario</div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="https://public.ehealthsask.ca/sites/COVID-19/"><?php echo $translations['self-assess'][$current_language]; ?></a>
+                                <a class="small text-white stretched-link" href="https://public.ehealthsask.ca/sites/COVID-19/">Launch COVID-19 Self Assessment</a>
                                 <div class="small text-white"><svg class="svg-inline--fa fa-angle-right fa-w-8" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 256 512" data-fa-i2svg="">
                                         <path fill="currentColor"
@@ -191,9 +74,10 @@
 
                     <div class="col-xl-3 col-md-6">
                         <div class="card bg-primary text-white mb-4">
-                            <div class="card-body"><?php echo $translations['outside-canada'][$current_language]; ?></div>
+                            <div class="card-body"><b>Currently Outside of Canada?</b><br>Here's what you need to know.</div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection/latest-travel-health-advice.html"><?php echo $translations['gov-instructions'][$current_language]; ?></a>
+                                <a class="small text-white stretched-link" href="https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection/latest-travel-health-advice.html">Instructions from the Government of
+                                    Canada</a>
                                 <div class="small text-white"><svg class="svg-inline--fa fa-angle-right fa-w-8" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 256 512" data-fa-i2svg="">
                                         <path fill="currentColor"
@@ -205,9 +89,9 @@
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card bg-primary text-white mb-4">
-                            <div class="card-body"><b><?php echo $translations['be-prepared'][$current_language]; ?></b><br><?php echo $translations['learn-more'][$current_language]; ?></div>
+                            <div class="card-body"><b>Be Prepared</b><br>Learn more about COVID-19</div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection/being-prepared.html"><?php echo $translations['learn-more'][$current_language]; ?></a>
+                                <a class="small text-white stretched-link" href="https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection/being-prepared.html">Learn More</a>
                                 <div class="small text-white"><svg class="svg-inline--fa fa-angle-right fa-w-8" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 256 512" data-fa-i2svg="">
                                         <path fill="currentColor"
@@ -223,7 +107,7 @@
                 <div class="row">
                     <div class="col-xl-6" id="displayMap">
                         <div class="card mb-4">
-                            <div class="card-header"><i class="fas fa-chart-bar mr-1"></i><?php echo $translations['by-map'][$current_language]; ?><i><b><span id="totalCases"></span><?php echo $translations['cases'][$current_language]; ?> / <span id="totalDeath"></span> <?php echo $translations['deaths'][$current_language]; ?></b></i></div>
+                            <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>By Map</div>
                             <div class="card-body" style="padding:0px;">
                                 <div id="map"></div>
                                 <div id="map-overlay"></div>
@@ -232,7 +116,7 @@
                     </div>
                     <div class="col-xl-6" id="displayCumulative">
                         <div class="card mb-4">
-                            <div class="card-header"><i class="fas fa-chart-area mr-1"></i><?php echo $translations['canada-cumulative'][$current_language]; ?></div>
+                            <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Canada Cumulative Cases: <i><b><span id="totalCases"></span>cases / <span id="totalDeath"></span> deaths</b></i></div>
                             <div class="card-body"><canvas id="cumulativeCaseChart" width="100%"></canvas></div>
                         </div>
                     </div>
@@ -241,13 +125,13 @@
                 <div class="row">
                     <div class="col-xl-6">
                         <div class="card mb-4">
-                            <div class="card-header"><i class="fas fa-chart-area mr-1"></i><span id="newCasesByDay"><?php echo $translations['canada-new'][$current_language]; ?></span></div>
+                            <div class="card-header"><i class="fas fa-chart-area mr-1"></i><span id="newCasesByDay">Canada New Cases</span></div>
                             <div class="card-body" id="dailyCaseChartDiv"><canvas id="dailyCaseChart" width="100%" height="40"></canvas></div>
                         </div>
                     </div>
                     <div class="col-xl-6">
                         <div class="card mb-4">
-                            <div class="card-header"><i class="fas fa-chart-bar mr-1"></i><span id="newCasesByProvince"><?php echo $translations['by-province'][$current_language]; ?></span></div>
+                            <div class="card-header"><i class="fas fa-chart-bar mr-1"></i><span id="newCasesByProvince">By Province</span></div>
                             <div class="card-body" id="provinceCasesChartDiv"><canvas id="provinceCasesChart" width="100%" height="40"></canvas></div>
                         </div>
                     </div>
@@ -257,17 +141,17 @@
                 <br>
                 <br>
                 <div class="card mb-4">
-                    <div class="card-header"><i class="fas fa-table mr-1"></i><?php echo $translations['total-by-province'][$current_language]; ?></div>
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>Total Cases By Province</div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>Province</th>
-                                        <th><?php echo $translations['total-cases'][$current_language]; ?></th>
+                                        <th>Total Cases</th>
                                         <th>Infected per 100 000</th>
-                                        <th><?php echo $translations['deaths'][$current_language]; ?></th>
-                                        <th><?php echo $translations['source'][$current_language]; ?></th>
+                                        <th>Deaths</th>
+                                        <th>Source</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -293,33 +177,33 @@
                 </div>
 
                 <div class="card mb-4">
-                    <div class="card-header"><i class="fas fa-table mr-1"></i><?php echo $translations['individual-cases'][$current_language]; ?></div>
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>Individual Cases</div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="individualCaseTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th><?php echo $translations['patient-no'][$current_language]; ?></th>
-                                        <th><?php echo $translations['date'][$current_language]; ?></th>
+                                        <th>Patient #</th>
+                                        <th>Date</th>
                                         <th>Province</th>
-                                        <th><?php echo $translations['city'][$current_language]; ?></th>
-                                        <th><?php echo $translations['age'][$current_language]; ?></th>
-                                        <th><?php echo $translations['travel-history'][$current_language]; ?></th>
-                                        <th><?php echo $translations['confirmed-presumptive'][$current_language]; ?></th>
-                                        <th><?php echo $translations['source'][$current_language]; ?></th>
+                                        <th>City</th>
+                                        <th>Age</th>
+                                        <th>Travel History</th>
+                                        <th>Confirmed/Presumptive</th>
+                                        <th>Source</th>
                                     </tr>
                                 </thead>
 
                                 <tfoot>
                                     <tr>
-                                        <th><?php echo $translations['patient-no'][$current_language]; ?></th>
-                                        <th><?php echo $translations['date'][$current_language]; ?></th>
+                                        <th>Patient #</th>
+                                        <th>Date</th>
                                         <th>Province</th>
-                                        <th><?php echo $translations['city'][$current_language]; ?></th>
-                                        <th><?php echo $translations['age'][$current_language]; ?></th>
-                                        <th><?php echo $translations['travel-history'][$current_language]; ?></th>
-                                        <th><?php echo $translations['confirmed-presumptive'][$current_language]; ?></th>
-                                        <th><?php echo $translations['source'][$current_language]; ?></th>
+                                        <th>City</th>
+                                        <th>Age</th>
+                                        <th>Travel History</th>
+                                        <th>Confirmed/Presumptive</th>
+                                        <th>Source</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -337,7 +221,7 @@
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted"><?php echo $translations['copyright'][$current_language]; ?> // <a href="mailto:noah.little@usask.ca">noah.little@usask.ca</a></div>
+                    <div class="text-muted">Copyright &copy; COVID19Tracker.ca 2020 // Reporting presumptived and confirmed cases in near real-time // <a href="mailto:noah.little@usask.ca">noah.little@usask.ca</a></div>
 
                 </div>
             </div>
