@@ -75,3 +75,7 @@ body{ background-color: #f1f1f1; }
 .add-new-form textarea{width:370px; padding: 12px;  border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;  margin-top: 6px;  margin-bottom: 16px; }
 .add-new-form select{width:370px; padding: 12px;  border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;  margin-top: 6px;  margin-bottom: 16px; }
 .add-new-form input[type=submit]{    width: 150px !important; }
+
+.sb-topnav .navbar-brand {
+  width: auto;
+}
