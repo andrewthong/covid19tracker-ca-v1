@@ -37,10 +37,10 @@ function getProvinceData(province) {
         var cases = 0;
         var deaths = 0;
         if ("cases" in res["data"])
-            cases = res["data"]["cases"].length;
+            cases = res["data"]["total_cases"];
 
         if ("deaths" in res["data"])
-            deaths = res["data"]["deaths"].length;
+            deaths = res["data"]["total_deaths"];
 
         $('#provinceTotalCases')[0].innerHTML = "Total Cases: " + cases;
         $('#provinceTotalDeaths')[0].innerHTML = "Total Deaths: " + deaths;
