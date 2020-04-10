@@ -135,9 +135,9 @@ class Cases
     }
 
     // individualCases: gets all cases
-    public function individualCases()
+    public function individualCases( $offset = 0, $limit = 100 )
     {
-        $query = "SELECT * , DATE_FORMAT(DATE, '%m/%d/%y') AS dte from `new_case` ";
+        $query = "SELECT * , DATE_FORMAT(DATE, '%m/%d/%y') AS dte from `new_case` ORDER BY `id` DESC LIMIT {$limit} OFFSET {$offset}";
 
         $result = $this->getQry($query);
 
@@ -150,15 +150,25 @@ class Cases
     }
 
     // getProvinceData: gets deaths + cases by province
-    public function getProvinceData($province)
+    public function getProvinceData( $province, $offset = 0, $limit = 100 )
     {
-        $query_cases = "SELECT *, DATE_FORMAT(`date`, '%Y-%m-%d') AS dte FROM new_case C where C.province = '" . $province . "'";
-        $query_deaths = "SELECT *, DATE_FORMAT(`date`, '%Y-%m-%d') AS dte FROM new_death D where D.province = '" . $province . "'";
+        $query_cases = "SELECT SQL_CALC_FOUND_ROWS *, DATE_FORMAT(`date`, '%Y-%m-%d') AS dte FROM new_case C where C.province = '{$province}' ORDER BY `id` DESC LIMIT {$limit} OFFSET {$offset}";
+        $query_deaths = "SELECT SQL_CALC_FOUND_ROWS *, DATE_FORMAT(`date`, '%Y-%m-%d') AS dte FROM new_death D where D.province = '{$province}' ORDER BY `id` DESC LIMIT {$limit} OFFSET {$offset}";
 
         $result_cases = $this->getQry($query_cases);
+        $result_cases_total = $this->getQry("SELECT FOUND_ROWS()");
         $result_deaths = $this->getQry($query_deaths);
+        $result_deaths_total = $this->getQry("SELECT FOUND_ROWS()");
 
-        $data = array();
+        // setup response
+        $data = array(
+            'total_cases' => 0,
+            'total_deaths' => 0,
+        );
+
+        // found rows
+        $data['total_cases'] = $result_cases_total->fetchColumn();
+        $data['total_deaths'] = $result_deaths_total->fetchColumn();
 
         if ($result_cases->rowCount() > 0) {
             $row = $result_cases->fetchAll(PDO::FETCH_ASSOC);
