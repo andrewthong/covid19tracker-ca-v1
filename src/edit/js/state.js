@@ -134,3 +134,7 @@ $(document).ready(() => {
 function goAdvanced() {
     window.location.href = url + "advanced.html";
 }
+
+function goCases() {
+    window.location.href = "https://docs.google.com/spreadsheets/d/1e0QhkGT3XzJJh7l7EfUkK3be-81TawOEqO3JHMD8Y8s/edit?usp=sharing";
+}
