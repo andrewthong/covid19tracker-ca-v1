@@ -32,7 +32,12 @@ class Cases
     // totalCases: gets total cases
     public function totalCases()
     {
-        $query = "SELECT COUNT(Distinct C.id) AS TotalCase, COUNT(Distinct D.id) AS TotalDeath FROM new_case C, new_death D";
+        // $query = "SELECT COUNT(Distinct C.id) AS TotalCase, COUNT(Distinct D.id) AS TotalDeath FROM new_case C, new_death D";
+        $query = "SELECT COUNT(c_id) as TotalCase, COUNT(f_id) as TotalDeath FROM (
+  SELECT id AS c_id, null as f_id FROM new_case
+UNION
+  SELECT null AS c_id, id AS f_id FROM new_death
+) UN";
         $result = $this->getQry($query);
 
         if ($result->rowCount() > 0) {
